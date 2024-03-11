@@ -1,0 +1,18 @@
+{
+    "name": "tresorkasenda/ballstack",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tresor-Kasenda",
+            "email": "tresorkasendat@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Tresorkasenda\\Ballstack\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
