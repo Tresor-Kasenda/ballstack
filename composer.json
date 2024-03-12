@@ -1,11 +1,24 @@
 {
     "name": "tresorkasenda/ballstack",
+    "description": "A simple stack implementation in Laravel, Livewire and Alpine.js",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "livewire",
+        "blade",
+        "ui",
+        "components",
+        "livewire-packages",
+        "livewire-components",
+        "alpinejs"
+    ],
     "authors": [
         {
+            "role": "Software Developer",
             "name": "Tresor-Kasenda",
-            "email": "tresorkasendat@gmail.com"
+            "email": "tresorkasendat@gmail.com",
+            "homepage": "https://tresorkasenda.tech"
         }
     ],
     "autoload": {
@@ -13,6 +26,27 @@
             "Tresorkasenda\\Ballstack\\": "src/"
         }
     },
+    "require": {
+        "illuminate/support": "^10.47",
+        "livewire/livewire": "^3.4"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.13",
+        "orchestra/testbench": "^8.21",
+        "pestphp/pest": "^2.33",
+        "larastan/larastan": "^2.8"
+    },
+    "scripts": {
+        "analyze": []
+    },
     "minimum-stability": "dev",
-    "require": {}
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "prefer-stable": true
 }
