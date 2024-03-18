@@ -68,7 +68,7 @@ class ComposerStaticInit657d7b066f824237725fb4e763ce3fc2
         ),
         'T' => 
         array (
-            'Tresorkasenda\\Ballstack\\' => 24,
+            'Tresorkasenda\\BallStack\\' => 24,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Termwind\\' => 9,
         ),
@@ -246,7 +246,7 @@ class ComposerStaticInit657d7b066f824237725fb4e763ce3fc2
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
-        'Tresorkasenda\\Ballstack\\' => 
+        'Tresorkasenda\\BallStack\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -7495,6 +7495,8 @@ class ComposerStaticInit657d7b066f824237725fb4e763ce3fc2
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'Tresorkasenda\\BallStack\\BallStackServiceProvider' => __DIR__ . '/../..' . '/src/BallStackServiceProvider.php',
+        'Tresorkasenda\\BallStack\\Console\\BallStackCommand' => __DIR__ . '/../..' . '/src/Console/BallStackCommand.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',

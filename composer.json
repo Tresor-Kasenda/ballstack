@@ -11,7 +11,8 @@
         "components",
         "livewire-packages",
         "livewire-components",
-        "alpinejs"
+        "alpinejs",
+        "boostrap 5"
     ],
     "authors": [
         {
@@ -23,10 +24,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "Tresorkasenda\\Ballstack\\": "src/"
+            "Tresorkasenda\\BallStack\\": "src/"
         }
     },
     "require": {
+        "illuminate/console": "^10.47",
         "illuminate/support": "^10.47",
         "livewire/livewire": "^3.4"
     },
@@ -35,6 +37,16 @@
         "orchestra/testbench": "^8.21",
         "pestphp/pest": "^2.33",
         "larastan/larastan": "^2.8"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Treosrkasenda\\BallStack\\BallStackServiceProvider"
+            ]
+        }
     },
     "scripts": {
         "analyze": []
