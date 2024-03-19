@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Menus;
+namespace Tresorkasenda\Menus;
 
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
-use App\View\TallFlex\Menus\Links\LinkItems;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\View\Component;
 use InvalidArgumentException;
-use Livewire\Component;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
+use Tresorkasenda\Menus\Links\LinkItems;
 
 class Sidebar extends Component implements Htmlable
 {
@@ -31,7 +31,8 @@ class Sidebar extends Component implements Htmlable
 
     public function __construct(
         protected ?string $name
-    ) {
+    )
+    {
     }
 
     public static function make(string $name = null): self
@@ -46,7 +47,7 @@ class Sidebar extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('components.sidebar.sidebar', $this->extractPublicMethods());
+        return view('ballstack::sidebar.sidebar', $this->extractPublicMethods());
     }
 
     public function logo(string $logo): static
@@ -64,9 +65,9 @@ class Sidebar extends Component implements Htmlable
         return asset('assets/images/logo.jpg');
     }
 
-    public function route(string $route): static
+    public function route(string|Route $route): static
     {
-        if ( ! Route::has($route)) {
+        if (!Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
         }
         $this->route = $route;
@@ -93,7 +94,7 @@ class Sidebar extends Component implements Htmlable
 
     public function getItems(): array
     {
-        return array_map(fn ($item) => $item, $this->items);
+        return array_map(fn($item) => $item, $this->items);
     }
 
     public function theme(string $theme): static

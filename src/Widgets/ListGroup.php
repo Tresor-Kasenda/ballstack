@@ -1,14 +1,16 @@
 <?php
 
-namespace App\View\TallFlex\Widgets;
+declare(strict_types=1);
 
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
+namespace Tresorkasenda\Widgets;
+
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Livewire\Component;
 use Override;
 use Throwable;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
 
 class ListGroup extends Component implements Htmlable
 {
@@ -43,6 +45,6 @@ class ListGroup extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('components.widgets.list-group', $this->extractPublicMethods());
+        return view('ballstack::widgets.list-group', $this->extractPublicMethods());
     }
 }

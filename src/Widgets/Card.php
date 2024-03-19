@@ -1,15 +1,17 @@
 <?php
 
-namespace App\View\TallFlex\Widgets;
+declare(strict_types=1);
 
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
+namespace Tresorkasenda\Widgets;
+
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use Override;
 use Throwable;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
 
 class Card extends Component implements Htmlable
 {
@@ -50,7 +52,7 @@ class Card extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('components.widgets.card', $this->extractPublicMethods());
+        return view('ballstack::widgets.card', $this->extractPublicMethods());
     }
 
     public function header(string|Closure|null $header): static

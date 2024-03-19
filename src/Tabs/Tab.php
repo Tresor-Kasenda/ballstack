@@ -2,11 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\BallStack\Tabs;
+namespace Tresorkasenda\Tabs;
 
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
-use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\Component;
@@ -14,6 +11,9 @@ use Illuminate\View\View;
 use InvalidArgumentException;
 use ReflectionClass;
 use Throwable;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
+use Tresorkasenda\Forms\GenericForms;
 
 class Tab extends Component implements Htmlable
 {
@@ -46,7 +46,7 @@ class Tab extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('components.sections.tab', $this->extractPublicMethods());
+        return view('ballstack::sections.tab', $this->extractPublicMethods());
     }
 
     public function schema(array|Closure|null $schema): static

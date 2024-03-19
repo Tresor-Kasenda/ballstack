@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Tables;
+namespace Tresorkasenda\Tables;
 
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
 use App\View\TallFlex\Exceptions\ModelDoesntExist;
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
@@ -16,6 +14,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Schema;
 use Throwable;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
 
 class Datatable extends Component implements Htmlable
 {
@@ -54,7 +54,7 @@ class Datatable extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('components.datatable.table', $this->extractPublicMethods());
+        return view('ballstack::datatable.table', $this->extractPublicMethods());
     }
 
     public function model(string $modelClass, int $perPage = 10): static

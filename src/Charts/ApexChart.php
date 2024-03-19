@@ -1,23 +1,31 @@
 <?php
 
-namespace Tresorkasenda\BallStack\Charts;
+declare(strict_types=1);
 
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
+namespace Tresorkasenda\Charts;
+
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Livewire\Component;
 use Override;
 use Throwable;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
 
 class ApexChart extends Component implements Htmlable
 {
     use HasEvaluated;
     use HasExtractPublicMethods;
 
+    /**
+     * @var Closure|array|null
+     */
     protected Closure|array|null $categories = [];
 
+    /**
+     * @var Closure|string|null
+     */
     protected Closure|string|null $color = null;
 
     protected Closure|bool|null $dataLabel = false;

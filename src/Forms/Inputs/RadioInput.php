@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms\Inputs;
+namespace Tresorkasenda\Forms\Inputs;
 
-use App\View\TallFlex\Contracts\HasChecked;
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasLabel;
-use App\View\TallFlex\Contracts\HasRequired;
-use App\View\TallFlex\Forms\GenericForms;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
+use Tresorkasenda\Contracts\HasChecked;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasLabel;
+use Tresorkasenda\Contracts\HasRequired;
+use Tresorkasenda\Forms\GenericForms;
 
 class RadioInput extends GenericForms implements Htmlable
 {
@@ -26,7 +26,8 @@ class RadioInput extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name
-    ) {
+    )
+    {
     }
 
     public static function make(string $name): static

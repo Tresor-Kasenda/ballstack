@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms;
+namespace Tresorkasenda\Forms;
 
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
@@ -22,7 +22,8 @@ class Forms extends GenericForms implements Htmlable
 
     public function __construct(
         protected ?string $name
-    ) {
+    )
+    {
     }
 
     public static function make(string $name = null): static
@@ -44,7 +45,7 @@ class Forms extends GenericForms implements Htmlable
 
     public function getSchema(): array
     {
-        return array_map(fn ($item) => $item, $this->schema);
+        return array_map(fn($item) => $item, $this->schema);
     }
 
     /**
@@ -62,7 +63,7 @@ class Forms extends GenericForms implements Htmlable
 
     public function action(string $route): static
     {
-        if ( ! Route::has($route)) {
+        if (!Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
         }
         $this->route = $route;

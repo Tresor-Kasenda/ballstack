@@ -1,14 +1,16 @@
 <?php
 
-namespace Tresorkasenda\BallStack\Wizard;
+declare(strict_types=1);
 
-use App\View\TallFlex\Forms\GenericForms;
+namespace Tresorkasenda\Wizard;
+
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 use Override;
 use Throwable;
+use Tresorkasenda\Forms\GenericForms;
 
 class Wizard extends GenericForms implements Htmlable
 {
@@ -68,6 +70,6 @@ class Wizard extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.wizard', $this->extractPublicMethods());
+        return view('ballstack::forms.wizard', $this->extractPublicMethods());
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Tables;
+namespace Tresorkasenda\Tables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

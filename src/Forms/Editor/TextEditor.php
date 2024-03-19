@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms\Editor;
+namespace Tresorkasenda\Forms\Editor;
 
-use App\View\TallFlex\Contracts\HasLabel;
-use App\View\TallFlex\Contracts\HasPlaceholder;
-use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
+use Tresorkasenda\Contracts\HasLabel;
+use Tresorkasenda\Contracts\HasPlaceholder;
+use Tresorkasenda\Forms\GenericForms;
 
 class TextEditor extends GenericForms implements Htmlable
 {
@@ -47,7 +47,7 @@ class TextEditor extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.editor.text-editor', $this->extractPublicMethods());
+        return view('ballstack::forms.editor.text-editor', $this->extractPublicMethods());
     }
 
     public function options(array $options): static

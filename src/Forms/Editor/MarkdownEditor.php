@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms\Editor;
+namespace Tresorkasenda\Forms\Editor;
 
-use App\View\TallFlex\Contracts\HasLabel;
-use App\View\TallFlex\Contracts\HasPlaceholder;
-use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Override;
 use Throwable;
+use Tresorkasenda\Contracts\HasLabel;
+use Tresorkasenda\Contracts\HasPlaceholder;
+use Tresorkasenda\Forms\GenericForms;
 
 class MarkdownEditor extends GenericForms implements Htmlable
 {
@@ -29,7 +29,7 @@ class MarkdownEditor extends GenericForms implements Htmlable
         $this->uniqueId = uniqid('markdown-' . $this->name, true);
     }
 
-    public static function make(string $name)
+    public static function make(?string $name): static
     {
         return app(static::class, ['name' => $name]);
     }
@@ -68,6 +68,6 @@ class MarkdownEditor extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.editor.markdown', $this->extractPublicMethods());
+        return view('ballstack::forms.editor.markdown', $this->extractPublicMethods());
     }
 }

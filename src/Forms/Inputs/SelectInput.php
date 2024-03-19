@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms\Inputs;
+namespace Tresorkasenda\Forms\Inputs;
 
-use App\View\TallFlex\Contracts\HasDisabled;
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasLabel;
-use App\View\TallFlex\Contracts\HasPlaceholder;
-use App\View\TallFlex\Contracts\HasRequired;
-use App\View\TallFlex\Contracts\HasRule;
-use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Throwable;
+use Tresorkasenda\Contracts\HasDisabled;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasLabel;
+use Tresorkasenda\Contracts\HasPlaceholder;
+use Tresorkasenda\Contracts\HasRequired;
+use Tresorkasenda\Contracts\HasRule;
+use Tresorkasenda\Forms\GenericForms;
 
 class SelectInput extends GenericForms implements Htmlable
 {

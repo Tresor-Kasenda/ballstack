@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\BallStack\View\Composers;
+namespace App\View\Composers;
 
-use App\View\TallFlex\Menus\Links\LinkItems;
-use App\View\TallFlex\Menus\Sidebar;
 use Illuminate\View\View;
+use Tresorkasenda\Menus\Links\LinkItems;
+use Tresorkasenda\Menus\Sidebar;
 
 class SideBarLayout
 {

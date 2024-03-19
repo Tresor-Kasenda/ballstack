@@ -1,10 +1,9 @@
 <?php
 
-namespace App\View\TallFlex\Widgets;
+declare(strict_types=1);
 
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
-use App\View\TallFlex\Forms\GenericForms;
+namespace Tresorkasenda\Widgets;
+
 use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
@@ -12,6 +11,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Override;
 use Throwable;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
+use Tresorkasenda\Forms\GenericForms;
 
 class FullCalendar extends GenericForms implements Htmlable
 {
@@ -117,6 +119,6 @@ class FullCalendar extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.widgets.fullcalendar', $this->extractPublicMethods());
+        return view('ballstack::widgets.fullcalendar', $this->extractPublicMethods());
     }
 }

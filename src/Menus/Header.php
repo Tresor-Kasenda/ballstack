@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Menus;
+namespace Tresorkasenda\Menus;
 
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
-use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
@@ -13,10 +11,14 @@ use Illuminate\Support\Facades\Route;
 use InvalidArgumentException;
 use Livewire\Component;
 use Throwable;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
+use Tresorkasenda\Forms\GenericForms;
 
 class Header extends Component implements Htmlable
 {
     use HasExtractPublicMethods;
+    use HasEvaluated;
 
     protected bool $notification = false;
 
@@ -36,7 +38,7 @@ class Header extends Component implements Htmlable
     {
     }
 
-    public static function make(?string $name): static
+    public static function make(?string $name = null): static
     {
         return new static($name);
     }
@@ -51,7 +53,7 @@ class Header extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('components.sidebar.header', $this->extractPublicMethods());
+        return view('ballstack::sidebar.header', $this->extractPublicMethods());
     }
 
     public function logo(string $logo): static
@@ -63,10 +65,7 @@ class Header extends Component implements Htmlable
 
     public function getLogo(): Closure|string|null
     {
-        if ($this->logo && file_exists(public_path($this->logo))) {
-            return $this->logo;
-        }
-        return asset('assets/images/logo.jpg');
+        return $this->evaluate($this->logo);
     }
 
     public function isNotify(bool $state): static
@@ -93,7 +92,7 @@ class Header extends Component implements Htmlable
 
     public function getNotify(): bool
     {
-        return $this->notification;
+        return $this->evaluate($this->notification);
     }
 
     public function items(array $items): static
@@ -120,9 +119,9 @@ class Header extends Component implements Htmlable
         return $this;
     }
 
-    public function getTheme(): Closure|string|null
+    public function getTheme(): ?string
     {
-        return $this->theme;
+        return $this->evaluate($this->theme);
     }
 
     public function icon(string $icon): static
@@ -132,8 +131,8 @@ class Header extends Component implements Htmlable
         return $this;
     }
 
-    public function getIcon(): Closure|string|null
+    public function getIcon(): ?string
     {
-        return $this->icon;
+        return $this->evaluate($this->icon);
     }
 }

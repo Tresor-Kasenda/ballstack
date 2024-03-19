@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Contracts;
+namespace Tresorkasenda\Contracts;
 
-use App\View\TallFlex\Forms\Inputs\Textarea;
+use Tresorkasenda\Forms\Inputs\Textarea;
 
 trait HasDisabled
 {

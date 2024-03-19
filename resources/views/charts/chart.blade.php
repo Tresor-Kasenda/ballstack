@@ -14,22 +14,22 @@
             this.chart = new Chart(this.$refs.chartjs, {
                 type: '{{ $type }}',
                 data: {
-                  labels: @js($datasets),
-                  datasets: [{
-                    label: '{{ $labels }}',
-                    data: @js($datasets),
-                    borderWidth: 1,
-                    backgroundColor: @js($backgroundColor),
-                    borderColor: @js($borderColor),
-                  }]
+                    labels: @js($datasets),
+                    datasets: [{
+                        label: '{{ $labels }}',
+                        data: @js($datasets),
+                        borderWidth: 1,
+                        backgroundColor: @js($backgroundColor),
+                        borderColor: @js($borderColor),
+                    }]
                 },
                 options: {
-                  indexAxis: 'y',
-                  scales: {
-                    y: {
-                      beginAtZero: true
+                    indexAxis: 'y',
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
-                  }
                 }
             });
         }

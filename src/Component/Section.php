@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\BallStack\Component;
+namespace Tresorkasenda\Component;
 
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
-use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use InvalidArgumentException;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
+use Tresorkasenda\Forms\GenericForms;
 
 class Section extends Component implements Htmlable
 {

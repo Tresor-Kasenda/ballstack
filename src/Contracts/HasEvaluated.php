@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Contracts;
+namespace Tresorkasenda\Contracts;
 
 use Closure;
 use Livewire\Component;

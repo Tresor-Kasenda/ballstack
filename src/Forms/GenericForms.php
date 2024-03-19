@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms;
+namespace Tresorkasenda\Forms;
 
-use App\View\TallFlex\Contracts\HasEvaluated;
-use App\View\TallFlex\Contracts\HasExtractPublicMethods;
 use Livewire\Component;
+use Tresorkasenda\Contracts\HasEvaluated;
+use Tresorkasenda\Contracts\HasExtractPublicMethods;
 
 abstract class GenericForms extends Component
 {
-    use HasExtractPublicMethods;
     use HasEvaluated;
+    use HasExtractPublicMethods;
 
     abstract public static function make(?string $name): static;
 }

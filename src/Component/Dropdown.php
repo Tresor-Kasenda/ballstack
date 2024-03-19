@@ -1,16 +1,17 @@
 <?php
 
-namespace Tresorkasenda\BallStack\Component;
+declare(strict_types=1);
 
-use App\View\TallFlex\Forms\GenericForms;
+namespace Tresorkasenda\Component;
+
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Override;
 use Throwable;
+use Tresorkasenda\Forms\GenericForms;
 
 class Dropdown extends GenericForms implements Htmlable
 {
-
     public function __construct(
         protected string $name
     )

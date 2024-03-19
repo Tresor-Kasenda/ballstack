@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Tables\Fields;
+namespace Tresorkasenda\Tables\Fields;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
@@ -13,7 +13,8 @@ class TextColumn extends Component implements Htmlable
 {
     public function __construct(
         protected ?string $name
-    ) {
+    )
+    {
     }
 
     public static function make(string $name): static
@@ -33,6 +34,4 @@ class TextColumn extends Component implements Htmlable
     {
         return view('');
     }
-
-
 }

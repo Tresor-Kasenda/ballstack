@@ -2,23 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\BallStack\View\Composers;
+namespace App\View\Composers;
 
-use App\View\TallFlex\Menus\Header;
-use App\View\TallFlex\Menus\Links\DropdownList;
 use Illuminate\View\View;
+use Tresorkasenda\Menus\Header;
 
 class LayoutComposer
 {
     public function compose(View $view): void
     {
-        $header = Header::make('')
+        $header = Header::make()
             ->logo('images/profile.jpg')
             ->theme('light')
             ->route('home')
             ->icon('menu')
             ->items([
-                DropdownList::make('')
+                // your LinkLayout
             ]);
 
         $view->with('header', $header);

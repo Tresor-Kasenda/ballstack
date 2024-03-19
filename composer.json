@@ -24,32 +24,36 @@
     ],
     "autoload": {
         "psr-4": {
-            "Tresorkasenda\\BallStack\\": "src/"
+            "Tresorkasenda\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tresorkasenda\\Tests\\": "tests"
         }
     },
     "require": {
-        "illuminate/console": "^10.47",
         "illuminate/support": "^10.47",
-        "livewire/livewire": "^3.4"
+        "livewire/livewire": "^3.4.9"
     },
     "require-dev": {
-        "laravel/pint": "^1.13",
+        "larastan/larastan": "^2.8",
+        "laravel/pint": "^1.14",
         "orchestra/testbench": "^8.21",
-        "pestphp/pest": "^2.33",
-        "larastan/larastan": "^2.8"
+        "pestphp/pest": "^2.33"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.x-dev"
-        },
         "laravel": {
             "providers": [
-                "Treosrkasenda\\BallStack\\BallStackServiceProvider"
+                "Tresorkasenda\\BallStackServiceProvider"
             ]
         }
     },
     "scripts": {
-        "analyze": []
+        "analyze": [
+            "./vendor/bin/pint",
+            "./vendor/bin/pest"
+        ]
     },
     "minimum-stability": "dev",
     "config": {

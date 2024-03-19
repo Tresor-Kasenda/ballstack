@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\View\TallFlex\Forms\Editor;
+namespace Tresorkasenda\Forms\Editor;
 
-use App\View\TallFlex\Contracts\HasDisabled;
-use App\View\TallFlex\Contracts\HasLabel;
-use App\View\TallFlex\Contracts\HasPlaceholder;
-use App\View\TallFlex\Contracts\HasReadOnly;
-use App\View\TallFlex\Contracts\HasRequired;
-use App\View\TallFlex\Forms\GenericForms;
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Throwable;
+use Tresorkasenda\Contracts\HasDisabled;
+use Tresorkasenda\Contracts\HasLabel;
+use Tresorkasenda\Contracts\HasPlaceholder;
+use Tresorkasenda\Contracts\HasReadOnly;
+use Tresorkasenda\Contracts\HasRequired;
+use Tresorkasenda\Forms\GenericForms;
 
 class Textarea extends GenericForms implements Htmlable
 {
@@ -102,6 +102,6 @@ class Textarea extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.editor.textarea', $this->extractPublicMethods());
+        return view('ballstack::forms.editor.textarea', $this->extractPublicMethods());
     }
 }

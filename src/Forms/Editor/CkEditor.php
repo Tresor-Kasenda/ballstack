@@ -1,14 +1,16 @@
 <?php
 
-namespace App\View\TallFlex\Forms\Editor;
+declare(strict_types=1);
 
-use App\View\TallFlex\Contracts\HasLabel;
-use App\View\TallFlex\Contracts\HasPlaceholder;
-use App\View\TallFlex\Forms\GenericForms;
+namespace Tresorkasenda\Forms\Editor;
+
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Override;
 use Throwable;
+use Tresorkasenda\Contracts\HasLabel;
+use Tresorkasenda\Contracts\HasPlaceholder;
+use Tresorkasenda\Forms\GenericForms;
 
 class CkEditor extends GenericForms implements Htmlable
 {
@@ -21,7 +23,7 @@ class CkEditor extends GenericForms implements Htmlable
     {
     }
 
-    public static function make(string $name)
+    public static function make(?string $name): static
     {
         return app(static::class, ['name' => $name]);
     }
@@ -43,6 +45,6 @@ class CkEditor extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.editor.ckeditor', $this->extractPublicMethods());
+        return view('ballstack::forms.editor.ckeditor', $this->extractPublicMethods());
     }
 }

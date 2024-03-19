@@ -9,10 +9,21 @@
     <div class="nk-sidebar-element nk-sidebar-head">
         <div class="nk-sidebar-brand">
             <a href="{{ $route }}" class="logo-link nk-sidebar-logo" wire:navigate>
-                <img class="logo-light logo-img" src="{{ $getLogo() }}" srcset="{{ $getLogo() }} 2x" alt="{{ $name }}">
-                <img class="logo-dark logo-img" src="{{ $getLogo() }}" srcset="{{ $getLogo() }} 2x" alt="{{ $name }}">
-                <img class="logo-small logo-img logo-img-small" src="{{ $getLogo() }}" srcset="{{ $getLogo() }} 2x"
-                     alt="{{ $name }}">
+                <img
+                    class="logo-light logo-img"
+                    src="{{ $getLogo() }}"
+                    srcset="{{ $getLogo() }} 2x"
+                    alt="{{ $name }}">
+                <img
+                    class="logo-dark logo-img"
+                    src="{{ $getLogo() }}"
+                    srcset="{{ $getLogo() }} 2x"
+                    alt="{{ $name }}">
+                <img
+                    class="logo-small logo-img logo-img-small"
+                    src="{{ $getLogo() }}"
+                    srcset="{{ $getLogo() }} 2x"
+                    alt="{{ $name }}">
             </a>
         </div>
         <div class="nk-menu-trigger me-n2">
