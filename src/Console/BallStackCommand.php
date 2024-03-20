@@ -73,12 +73,8 @@ class BallStackCommand extends Command
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Providers', app_path('Providers'));
 
         // Actions...
-        (new Filesystem)->ensureDirectoryExists(app_path('Livewire/Actions'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Livewire/Actions', app_path('Livewire/Actions'));
-
-        // Forms...
-        (new Filesystem)->ensureDirectoryExists(app_path('Livewire/Forms'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Livewire/Forms', app_path('Livewire/Forms'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Livewire'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Livewire', app_path('Livewire'));
 
         // Public
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/js', public_path('assets'));
@@ -101,7 +97,6 @@ class BallStackCommand extends Command
 
         // Routes...
         copy(__DIR__ . '/../../stubs/routes/web.php', base_path('routes/web.php'));
-        copy(__DIR__ . '/../../stubs/routes/auth.php', base_path('routes/auth.php'));
 
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
@@ -170,14 +165,6 @@ class BallStackCommand extends Command
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 }) === 0;
-    }
-
-    protected function verifyIfAppServiceProviderExist()
-    {
-        // get app service provider using reflection
-        // get boot property and copy
-        // view()->composer()
-        // update service provider
     }
 
     protected function installTests(): bool

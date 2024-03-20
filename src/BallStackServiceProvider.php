@@ -6,17 +6,12 @@ namespace Tresorkasenda;
 
 use Illuminate\Support\ServiceProvider;
 use Tresorkasenda\Console\BallStackCommand;
-use Tresorkasenda\View\Composers\LayoutComposer;
-use Tresorkasenda\View\Composers\SideBarLayout;
 
 class BallStackServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
         $this->viewConfig();
-
-        view()->composer('layouts.guest', LayoutComposer::class);
-        view()->composer('layouts.guest', SideBarLayout::class);
 
         $this->mergeConfigFrom(__DIR__ . '/../config/ballstack.php', 'ballstack');
     }
