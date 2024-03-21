@@ -47,10 +47,6 @@ class BallStackCommand extends Command
             "🎉  Copying stubs folders and read content  🎉"
         );
 
-        // Views...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/resources/views', resource_path('views'));
-
         // Livewire Components...
         (new Filesystem)->ensureDirectoryExists(resource_path('views/livewire'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/resources/views/livewire', resource_path('views/livewire'));
@@ -68,7 +64,6 @@ class BallStackCommand extends Command
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/View/Composers', app_path('View/Composers'));
 
         // extend composer files to app service Provider
-        $this->verifyIfAppServiceProviderExist();
         (new Filesystem)->ensureDirectoryExists(app_path('Providers'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Providers', app_path('Providers'));
 
@@ -101,7 +96,6 @@ class BallStackCommand extends Command
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
         $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
-        $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
 
         // Boostrap / Vite...
         copy(__DIR__ . '/../../stubs/vite.config.js', base_path('vite.config.js'));
@@ -114,6 +108,8 @@ class BallStackCommand extends Command
             $this->runCommands(['pnpm install', 'pnpm run build']);
         } elseif (file_exists(base_path('yarn.lock'))) {
             $this->runCommands(['yarn install', 'yarn run build']);
+        } elseif (file_exists(base_path('bun.lock'))) {
+            $this->runCommands(['bun install', 'bun run build']);
         } else {
             $this->runCommands(['npm install', 'npm run build']);
         }
@@ -183,9 +179,9 @@ class BallStackCommand extends Command
                 return false;
             }
 
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/pest-tests/Feature', base_path('tests/Feature'));
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/pest-tests/Unit', base_path('tests/Unit'));
-            (new Filesystem)->copy(__DIR__ . '/../../stubs/pest-tests/Pest.php', base_path('tests/Pest.php'));
+            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/tests/Feature', base_path('tests/Feature'));
+            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/tests/Unit', base_path('tests/Unit'));
+            (new Filesystem)->copy(__DIR__ . '/../../stubs/tests/Pest.php', base_path('tests/Pest.php'));
         } else {
             (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/tests/Feature', base_path('tests/Feature'));
         }

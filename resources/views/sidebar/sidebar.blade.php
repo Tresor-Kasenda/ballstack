@@ -2,7 +2,7 @@
     $route = $getRoute();
     $items = $getItems();
     $icon = $getIcon();
-    $name = $getName();
+    $name = $getName() ?? str($icon)->title();
 @endphp
 
 <div class="nk-sidebar nk-sidebar-fixed is-{{ $getTheme() ?? 'white' }} " data-content="sidebarMenu">

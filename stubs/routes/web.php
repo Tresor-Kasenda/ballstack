@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('');
+});
+
 Route::middleware('guest')->group(function (): void {
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])

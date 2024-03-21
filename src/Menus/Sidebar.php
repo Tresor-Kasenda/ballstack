@@ -40,6 +40,11 @@ class Sidebar extends Component implements Htmlable
         return new static($name);
     }
 
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
     public function toHtml(): string
     {
         return $this->render()->render();
