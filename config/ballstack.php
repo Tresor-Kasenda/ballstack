@@ -2,18 +2,12 @@
 
 declare(strict_types=1);
 
-use Tresorkasenda\BallStack\View\Composers\SideBarLayout;
+use App\View\Composers\LayoutComposer;
+use App\View\Composers\SideBarLayout;
 
 return [
-
-    /**
-     *
-     * ------------------------------------------------------------------------------------------------
-     *
-     *
-     * ------------------------------------------------------------------------------------------------
-     *
-     */
-    'sidebar' => SideBarLayout::class,
-
+    'layout' => [
+        'sidebar' => SideBarLayout::class,
+        'header' => LayoutComposer::class
+    ]
 ];

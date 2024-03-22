@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use View\Composers\LayoutComposer;
-use View\Composers\SideBarLayout;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('layouts.guest', LayoutComposer::class);
-        view()->composer('layouts.guest', SideBarLayout::class);
+        view()->composer('layouts.guest', config('ballstack.layout.header'));
+        view()->composer('layouts.guest', config('ballstack.layout.sidebar'));
     }
 }

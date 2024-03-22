@@ -83,7 +83,7 @@ class TextInput extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.input', $this->extractPublicMethods());
+        return view('ballstack::forms.input', $this->extractPublicMethods());
     }
 
     public function type(string|Closure $type): self
@@ -175,6 +175,14 @@ class TextInput extends GenericForms implements Htmlable
     public function getStep(): int|float|string|null
     {
         return $this->evaluate($this->step ?? null) ?? null;
+    }
+
+
+    public function autocomplete(bool|Closure $autocomplete = true): static
+    {
+        $this->autocomplete = $autocomplete;
+
+        return $this;
     }
 
     public function getAutocomplete(): bool

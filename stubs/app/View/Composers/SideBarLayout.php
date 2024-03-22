@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\View\Composers;
 
 use Illuminate\View\View;
-use Tresorkasenda\Menus\Links\LinkItems;
 use Tresorkasenda\Menus\Sidebar;
 
 class SideBarLayout
@@ -18,9 +17,7 @@ class SideBarLayout
             ->route('home')
             ->icon('menu')
             ->items([
-                LinkItems::make('Home Page')
-                    ->route('home')
-                    ->icon('home'),
+                // Link items
             ]);
 
         $view->with('sidebar', $sidebar);

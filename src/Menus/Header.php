@@ -5,32 +5,34 @@ declare(strict_types=1);
 namespace Tresorkasenda\Menus;
 
 use Closure;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use InvalidArgumentException;
 use Livewire\Component;
 use Throwable;
 use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasExtractPublicMethods;
+use Tresorkasenda\Contracts\HasImage;
 use Tresorkasenda\Forms\GenericForms;
 
 class Header extends Component implements Htmlable
 {
     use HasExtractPublicMethods;
     use HasEvaluated;
+    use HasImage;
 
-    protected bool $notification = false;
+    protected bool|Closure|null $notification = false;
 
-    protected string|Closure|null $logo = '';
+    protected bool|Closure|null $searchable = false;
 
     protected string|Closure|null $theme;
 
-    protected string|Closure|null $icon;
+    protected string|Closure|null $route;
 
-    protected string $route;
-
-    protected array $items = [];
+    protected array|Closure|Collection|Arrayable|null $items = [];
 
     public function __construct(
         public ?string $name = null
@@ -56,26 +58,14 @@ class Header extends Component implements Htmlable
         return view('ballstack::sidebar.header', $this->extractPublicMethods());
     }
 
-    public function logo(string $logo): static
-    {
-        $this->logo = $logo;
-
-        return $this;
-    }
-
-    public function getLogo(): Closure|string|null
-    {
-        return $this->evaluate($this->logo);
-    }
-
-    public function isNotify(bool $state): static
+    public function isNotify(bool|Closure|null $state): static
     {
         $this->notification = $state;
 
         return $this;
     }
 
-    public function route(string $route): static
+    public function route(string|Closure|null $route): static
     {
         if (!Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
@@ -83,6 +73,18 @@ class Header extends Component implements Htmlable
         $this->route = $route;
 
         return $this;
+    }
+
+    public function searchable(bool|Closure|null $searchable = true): static
+    {
+        $this->searchable = $searchable;
+
+        return $this;
+    }
+
+    public function isSearchable(): ?bool
+    {
+        return $this->evaluate($this->searchable);
     }
 
     public function getRoute(): string
@@ -95,7 +97,7 @@ class Header extends Component implements Htmlable
         return $this->evaluate($this->notification);
     }
 
-    public function items(array $items): static
+    public function items(array|Closure|Collection|Arrayable|null $items): static
     {
         $this->items = array_map(function ($item) {
             if ($item instanceof GenericForms || $item instanceof \Illuminate\View\Component) {
@@ -112,7 +114,7 @@ class Header extends Component implements Htmlable
         return array_map(fn($item) => $item, $this->items);
     }
 
-    public function theme(string $theme): static
+    public function theme(string|Closure|null $theme): static
     {
         $this->theme = $theme;
 
@@ -122,17 +124,5 @@ class Header extends Component implements Htmlable
     public function getTheme(): ?string
     {
         return $this->evaluate($this->theme);
-    }
-
-    public function icon(string $icon): static
-    {
-        $this->icon = $icon;
-
-        return $this;
-    }
-
-    public function getIcon(): ?string
-    {
-        return $this->evaluate($this->icon);
     }
 }

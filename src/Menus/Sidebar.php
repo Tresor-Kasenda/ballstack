@@ -12,25 +12,25 @@ use Illuminate\Support\Traits\Macroable;
 use Illuminate\View\Component;
 use InvalidArgumentException;
 use Tresorkasenda\Contracts\HasExtractPublicMethods;
+use Tresorkasenda\Contracts\HasIcons;
+use Tresorkasenda\Contracts\HasImage;
 use Tresorkasenda\Menus\Links\LinkItems;
 
 class Sidebar extends Component implements Htmlable
 {
     use HasExtractPublicMethods;
     use Macroable;
-
-    protected string|Closure|null $logo = null;
+    use HasImage;
+    use HasIcons;
 
     protected string|Closure|null $theme;
-
-    protected string|Closure|null $icon;
 
     protected string $route;
 
     protected array $items = [];
 
     public function __construct(
-        protected ?string $name
+        protected ?string $name = null
     )
     {
     }
@@ -55,20 +55,6 @@ class Sidebar extends Component implements Htmlable
         return view('ballstack::sidebar.sidebar', $this->extractPublicMethods());
     }
 
-    public function logo(string $logo): static
-    {
-        $this->logo = $logo;
-
-        return $this;
-    }
-
-    public function getLogo(): Closure|string|null
-    {
-        if ($this->logo && file_exists(public_path($this->logo))) {
-            return $this->logo;
-        }
-        return asset('assets/images/logo.jpg');
-    }
 
     public function route(string|Route $route): static
     {
@@ -112,17 +98,5 @@ class Sidebar extends Component implements Htmlable
     public function getTheme(): Closure|string|null
     {
         return $this->theme;
-    }
-
-    public function icon(string $icon): static
-    {
-        $this->icon = $icon;
-
-        return $this;
-    }
-
-    public function getIcon(): Closure|string|null
-    {
-        return $this->icon;
     }
 }

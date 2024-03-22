@@ -14,14 +14,16 @@ use Throwable;
 
 class Forms extends GenericForms implements Htmlable
 {
-    protected array $schema = [];
+    protected array|Closure|null $schema = [];
 
-    protected string|null $route = null;
+    protected string|Closure|null $route = null;
 
     protected int|Closure|null $column = 0;
 
+    protected bool|Closure|null $hasCard = false;
+
     public function __construct(
-        protected ?string $name
+        protected ?string $name = null
     )
     {
     }
@@ -31,7 +33,7 @@ class Forms extends GenericForms implements Htmlable
         return new static($name);
     }
 
-    public function schema(array $schema): static
+    public function schema(array|Closure|null $schema): static
     {
         $this->schema = array_map(function ($schema) {
             if ($schema instanceof GenericForms || $schema instanceof Component) {
@@ -43,9 +45,9 @@ class Forms extends GenericForms implements Htmlable
         return $this;
     }
 
-    public function getSchema(): array
+    public function getSchema(): ?array
     {
-        return array_map(fn($item) => $item, $this->schema);
+        return $this->evaluate($this->schema);
     }
 
     /**
@@ -58,10 +60,10 @@ class Forms extends GenericForms implements Htmlable
 
     public function render(): View
     {
-        return view('components.forms.form-builder', $this->extractPublicMethods());
+        return view('ballstack::forms.form-builder', $this->extractPublicMethods());
     }
 
-    public function action(string $route): static
+    public function action(string|Closure|null $route): static
     {
         if (!Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
@@ -76,17 +78,7 @@ class Forms extends GenericForms implements Htmlable
         return $this->route ?? "";
     }
 
-    public function hasColumn(): bool
-    {
-        return isset($this->column);
-    }
-
-    public function hasSection(): bool
-    {
-        return isset($this->schema);
-    }
-
-    public function column(int $column): static
+    public function column(int|Closure|null $column): static
     {
         $this->column = $column;
 
@@ -96,5 +88,17 @@ class Forms extends GenericForms implements Htmlable
     public function getColumn(): int|Closure|null
     {
         return $this->column;
+    }
+
+    public function hasCard(bool|Closure|null $hasCard = true): static
+    {
+        $this->hasCard = $hasCard;
+
+        return $this;
+    }
+
+    public function isCard(): ?bool
+    {
+        return $this->evaluate($this->hasCard);
     }
 }

@@ -33,8 +33,8 @@
         }
     },
     "require": {
-        "illuminate/support": "^10.47",
-        "livewire/livewire": "^3.4.9"
+        "php": "^8.3",
+        "illuminate/support": "^10.47"
     },
     "require-dev": {
         "larastan/larastan": "^2.8",

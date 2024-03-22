@@ -17,11 +17,18 @@
     $prefix = $getPrefix();
 @endphp
 
+@props([
+    'name' => $name,
+    'placeholder' => $placeholder,
+    'label' => $label,
+    'type' => $type,
+])
+
 <div class="form-group">
     @if($label)
         <label class="form-label" for="{{ $uniqueId }}">{{ $label }}</label>
     @endif
-    
+
     <div class="form-control-wrap">
         <div class="input-group">
             @if($getPosition() === 'left')
