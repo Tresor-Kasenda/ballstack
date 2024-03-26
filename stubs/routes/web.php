@@ -1,34 +1,23 @@
 <?php
 
+use App\Livewire\Pages\Auth\LoginComponent;
+use App\Livewire\Pages\Auth\PasswordResetComponent;
+use App\Livewire\Pages\Auth\RegisterComponent;
+use App\Livewire\Pages\Auth\ResetPasswordComponent;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('');
-});
+Route::get('/', fn() => view('welcome'))->name('home');
 
 Route::middleware('guest')->group(function (): void {
+    Route::get('/login', LoginComponent::class)->name('login');
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+    Route::get('/register', RegisterComponent::class)->name('register');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
-
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
-
-    Route::post('register', [RegisteredUserController::class, 'store']);
-
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+    Route::get('forgot-password', PasswordResetComponent::class)
         ->name('password.request');
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-        ->name('password.email');
-
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+    Route::get('reset-password/{token}', ResetPasswordComponent::class)
         ->name('password.reset');
-
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-        ->name('password.store');
 });
 
 Route::middleware('auth')->group(function (): void {

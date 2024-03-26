@@ -22,10 +22,6 @@ class BallStackCommand extends Command
     {
         $this->info('✨  This is a command for the BallStack package  ✨');
 
-        $this->info(
-            "⚡  update  node package manager.  ⚡ 🎈🎉✨⚡💝💥"
-        );
-
         $this->updateNodePackages(function ($packages) {
             return [
                     'alpinejs' => '^3.4.2',
@@ -115,7 +111,7 @@ class BallStackCommand extends Command
         }
 
         $this->line('');
-        $this->components->info('Breeze scaffolding installed successfully.');
+        $this->components->info('Ballstack scaffolding installed successfully.');
 
     }
 

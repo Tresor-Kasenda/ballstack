@@ -15,10 +15,10 @@
     </div>
     <div class="nk-block-head">
         <div class="nk-block-head-content">
-            <h5 class="nk-block-title">Sign-In</h5>
+            <h5 class="nk-block-title">Reset Password</h5>
         </div>
     </div>
-    <form wire:submit="login">
+    <form wire:submit="passwordReset">
         <div class="form-group">
             <div class="form-label-group">
                 <x-label :value="__('Email')" for="email"/>
@@ -43,12 +43,6 @@
         <div class="form-group">
             <div class="form-label-group">
                 <x-label :value="__('Password')" for="password"/>
-                <a
-                    class="link link-primary link-sm"
-                    tabindex="-1"
-                    href="{{ route('password.request') }}"
-                    wire:navigate
-                >Forgot password?</a>
             </div>
             <div class="form-control-wrap">
                 <x-text-input
@@ -66,22 +60,32 @@
 
             <x-error :messages="$errors->get('password')" class="mt-1"/>
         </div>
+        <div class="form-group">
+            <div class="form-label-group">
+                <x-label :value="__('Confirm Password')" for="password_confirmation"/>
+            </div>
+            <div class="form-control-wrap">
+                <x-text-input
+                    wire:model="password_confirmation"
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    required
+                    autofocus
+                    autocomplete="new-password"
+                    class="form-control-lg"
+                    type="password"
+                    placeholder="Enter your password confirmation"
+                />
+            </div>
+
+            <x-error :messages="$errors->get('password')" class="mt-1"/>
+        </div>
         <x-primary-button
             type="submit"
             class="btn-lg btn-outline-primary btn-dim btn-block rounded"
             wire:loading.attr="disabled"
         >
-            Sign in
+            {{ __('Reset Password') }}
         </x-primary-button>
     </form>
-    <div class="form-note-s2 pt-4">
-        New on our platform?
-        <a href="{{ route('register') }}" wire:navigate>Create an account</a>
-    </div>
-    <div class="text-center pt-4 pb-3">
-        <h6 class="overline-title overline-title-sap">
-            <span>OR</span>
-        </h6>
-    </div>
-    <x-auth-social/>
 </div>

@@ -1,12 +1,6 @@
 @props([
-    'value',
-    'name'
+    'value'
 ])
-<div class="form-label-group">
-    <label
-        class="form-label"
-        for="{{ $name }}"
-    >
-        {{ $value ?? $slot }}
-    </label>
-</div>
+<label {{ $attributes->merge(['class' => 'form-label']) }}>
+    {{ $value ?? $slot }}
+</label>
