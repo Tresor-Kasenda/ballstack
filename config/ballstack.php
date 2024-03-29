@@ -19,19 +19,30 @@ return [
         'header' => LayoutComposer::class
     ],
 
+    /**
+     *
+     */
     'facebook' => [
         'client_id' => env('BALLSTACK_FACEBOOK_CLIENT_ID'),
         'client_secret' => env('BALLSTACK_FACEBOOK_CLIENT_SECRET'),
-        'redirect' => env('BALLSTACK_FACEBOOK_CLIENT_CALLBACK', 'http://example.com/callback-url'),
+        'redirect' => env('BALLSTACK_FACEBOOK_CLIENT_CALLBACK', 'https://example.com/callback-url'),
     ],
+
+    /**
+     *
+     */
     'google' => [
         'client_id' => env('BALLSTACK_GOOGLE_CLIENT_ID'),
         'client_secret' => env('BALLSTACK_GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('BALLSTACK_GOOGLE_CLIENT_CALLBACK', 'http://example.com/callback-url'),
+        'redirect' => env('BALLSTACK_GOOGLE_CLIENT_CALLBACK', 'https://example.com/callback-url'),
     ],
+
+    /**
+     *
+     */
     'github' => [
         'client_id' => env('BALLSTACK_GITHUB_CLIENT_ID'),
         'client_secret' => env('BALLSTACK_GITHUB_CLIENT_SECRET'),
-        'redirect' => env('BALLSTACK_GITHUB_CLIENT_CALLBACK', 'http://example.com/callback-url')
+        'redirect' => env('BALLSTACK_GITHUB_CLIENT_CALLBACK', 'https://example.com/callback-url')
     ]
 ];
