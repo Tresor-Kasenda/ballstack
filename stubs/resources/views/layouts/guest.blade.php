@@ -19,7 +19,10 @@
                     <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
                         {{ $slot }}
                     </div>
-                    <div class="nk-split-content nk-split-stretch bg-abstract"></div>
+                    <div
+                        class="nk-split-content nk-split-stretch bg-abstract"
+                        style="background-image: url('https://images.pexels.com/photos/357514/pexels-photo-357514.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
+                    ></div>
                 </div>
             </div>
         </div>

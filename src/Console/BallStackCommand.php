@@ -24,8 +24,8 @@ class BallStackCommand extends Command
 
         $this->updateNodePackages(function ($packages) {
             return [
-                    'alpinejs' => '^3.4.2',
-                ] + $packages;
+                'alpinejs' => '^3.4.2',
+            ] + $packages;
         });
 
         $this->info(
@@ -33,7 +33,7 @@ class BallStackCommand extends Command
         );
 
         // Install Livewire...
-        if (!$this->requireComposerPackages([
+        if ( ! $this->requireComposerPackages([
             'livewire/livewire:^3.4'
         ])) {
             return;
@@ -44,59 +44,59 @@ class BallStackCommand extends Command
         );
 
         // Livewire Components...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/livewire'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/resources/views/livewire', resource_path('views/livewire'));
+        (new Filesystem())->ensureDirectoryExists(resource_path('views/livewire'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/livewire', resource_path('views/livewire'));
 
         // Views Components...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/components'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/resources/views/components', resource_path('views/components'));
+        (new Filesystem())->ensureDirectoryExists(resource_path('views/components'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/components', resource_path('views/components'));
 
         // Views Layouts...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/resources/views/layouts', resource_path('views/layouts'));
+        (new Filesystem())->ensureDirectoryExists(resource_path('views/layouts'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/views/layouts', resource_path('views/layouts'));
 
         // Components...
-        (new Filesystem)->ensureDirectoryExists(app_path('View/Composers'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/View/Composers', app_path('View/Composers'));
+        (new Filesystem())->ensureDirectoryExists(app_path('View/Composers'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/app/View/Composers', app_path('View/Composers'));
 
         // extend composer files to app service Provider
-        (new Filesystem)->ensureDirectoryExists(app_path('Providers'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Providers', app_path('Providers'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Providers'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/app/Providers', app_path('Providers'));
 
         // Actions...
-        (new Filesystem)->ensureDirectoryExists(app_path('Livewire'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Livewire', app_path('Livewire'));
+        (new Filesystem())->ensureDirectoryExists(app_path('Livewire'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/app/Livewire', app_path('Livewire'));
 
         // Public
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/js', public_path('assets'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/public/js', public_path('assets'));
         //css
-        (new Filesystem)->ensureDirectoryExists(resource_path('css'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/resources/css', resource_path('css'));
+        (new Filesystem())->ensureDirectoryExists(resource_path('css'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/css', resource_path('css'));
 
         // font
-        (new Filesystem)->ensureDirectoryExists(resource_path('fonts'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/resources/fonts', resource_path('fonts'));
+        (new Filesystem())->ensureDirectoryExists(resource_path('fonts'));
+        (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/resources/fonts', resource_path('fonts'));
         $this->line('');
         $this->info(
             "🎉  Installing the pest test and copying stubs  🎉"
         );
 
         // Tests...
-        if (!$this->installTests()) {
+        if ( ! $this->installTests()) {
             return;
         }
 
         // Routes...
-        copy(__DIR__ . '/../../stubs/routes/web.php', base_path('routes/web.php'));
+        copy(__DIR__.'/../../stubs/routes/web.php', base_path('routes/web.php'));
 
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
         $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
 
         // Boostrap / Vite...
-        copy(__DIR__ . '/../../stubs/vite.config.js', base_path('vite.config.js'));
-        copy(__DIR__ . '/../../stubs/resources/css/app.css', resource_path('css/app.css'));
-        copy(__DIR__ . '/../../stubs/resources/js/app.js', resource_path('js/app.js'));
+        copy(__DIR__.'/../../stubs/vite.config.js', base_path('vite.config.js'));
+        copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
+        copy(__DIR__.'/../../stubs/resources/js/app.js', resource_path('js/app.js'));
 
         $this->components->info('Installing and building Node dependencies.');
 
@@ -117,7 +117,7 @@ class BallStackCommand extends Command
 
     protected static function updateNodePackages(callable $callback, $dev = true): void
     {
-        if (!file_exists(base_path('package.json'))) {
+        if ( ! file_exists(base_path('package.json'))) {
             return;
         }
 
@@ -134,7 +134,7 @@ class BallStackCommand extends Command
 
         file_put_contents(
             base_path('package.json'),
-            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
         );
     }
 
@@ -142,7 +142,7 @@ class BallStackCommand extends Command
     {
         $composer = $this->option('composer');
 
-        if ($composer !== 'global') {
+        if ('global' !== $composer) {
             $command = ['php', $composer, 'require'];
         }
 
@@ -152,34 +152,34 @@ class BallStackCommand extends Command
             $asDev ? ['--dev'] : [],
         );
 
-        return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                }) === 0;
+        return 0 === (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output): void {
+                $this->output->write($output);
+            });
     }
 
     protected function installTests(): bool
     {
-        (new Filesystem)->ensureDirectoryExists(base_path('tests/Feature'));
+        (new Filesystem())->ensureDirectoryExists(base_path('tests/Feature'));
 
         if ($this->option('pest') || $this->isUsingPest()) {
             if ($this->hasComposerPackage('phpunit/phpunit')) {
                 $this->removeComposerPackages(['phpunit/phpunit'], true);
             }
 
-            if (!$this->requireComposerPackages([
+            if ( ! $this->requireComposerPackages([
                 'pestphp/pest:^2.0',
                 'pestphp/pest-plugin-laravel:^2.0'
             ], true)) {
                 return false;
             }
 
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/tests/Feature', base_path('tests/Feature'));
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/tests/Unit', base_path('tests/Unit'));
-            (new Filesystem)->copy(__DIR__ . '/../../stubs/tests/Pest.php', base_path('tests/Pest.php'));
+            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/tests/Feature', base_path('tests/Feature'));
+            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/tests/Unit', base_path('tests/Unit'));
+            (new Filesystem())->copy(__DIR__.'/../../stubs/tests/Pest.php', base_path('tests/Pest.php'));
         } else {
-            (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/tests/Feature', base_path('tests/Feature'));
+            (new Filesystem())->copyDirectory(__DIR__.'/../../stubs/tests/Feature', base_path('tests/Feature'));
         }
 
         return true;
@@ -202,7 +202,7 @@ class BallStackCommand extends Command
     {
         $composer = $this->option('composer');
 
-        if ($composer !== 'global') {
+        if ('global' !== $composer) {
             $command = ['php', $composer, 'remove'];
         }
 
@@ -212,11 +212,11 @@ class BallStackCommand extends Command
             $asDev ? ['--dev'] : [],
         );
 
-        return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                }) === 0;
+        return 0 === (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output): void {
+                $this->output->write($output);
+            });
     }
 
     protected function replaceInFile($search, $replace, $path): void
@@ -232,12 +232,12 @@ class BallStackCommand extends Command
             try {
                 $process->setTty(true);
             } catch (RuntimeException $e) {
-                $this->output->writeln('  <bg=yellow;fg=black> WARN </> ' . $e->getMessage() . PHP_EOL);
+                $this->output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
             }
         }
 
-        $process->run(function ($type, $line) {
-            $this->output->write('    ' . $line);
+        $process->run(function ($type, $line): void {
+            $this->output->write('    '.$line);
         });
     }
 }

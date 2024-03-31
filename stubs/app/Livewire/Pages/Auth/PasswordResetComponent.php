@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Pages\Auth;
 
 use Illuminate\Contracts\Foundation\Application;
@@ -8,12 +10,14 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('layouts.guest')]
 #[Title('Forget Password')]
 class PasswordResetComponent extends Component
 {
+    #[Validate('required|string|email|exists:users')]
     public string $email = '';
 
     public function render(): Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|View|Application
@@ -23,15 +27,13 @@ class PasswordResetComponent extends Component
 
     public function sendPasswordReset(): void
     {
-        $this->validate([
-            'email' => ['required', 'string', 'email'],
-        ]);
+        $this->validate();
 
         $status = Password::sendResetLink(
             $this->only('email')
         );
 
-        if ($status != Password::RESET_LINK_SENT) {
+        if (Password::RESET_LINK_SENT !== $status) {
             $this->addError('email', __($status));
 
             return;

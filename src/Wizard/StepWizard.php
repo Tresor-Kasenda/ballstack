@@ -23,8 +23,7 @@ class StepWizard extends GenericForms implements Htmlable
 
     public function __construct(
         protected ?string $name
-    )
-    {
+    ) {
     }
 
     #[Override]

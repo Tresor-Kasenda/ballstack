@@ -26,9 +26,8 @@ class CheckboxInput extends GenericForms implements Htmlable
 
     public function __construct(
         protected ?string $name
-    )
-    {
-        $this->uniqueId = uniqid('checkbox-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('checkbox-'.$this->name, true);
     }
 
     public static function make(?string $name): static

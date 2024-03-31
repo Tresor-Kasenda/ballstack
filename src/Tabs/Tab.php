@@ -27,8 +27,7 @@ class Tab extends Component implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function make(string $name)
@@ -110,6 +109,6 @@ class Tab extends Component implements Htmlable
 
     public function getSchema(): array
     {
-        return array_map(fn($item) => $item, $this->schema);
+        return array_map(fn ($item) => $item, $this->schema);
     }
 }

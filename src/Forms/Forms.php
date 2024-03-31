@@ -24,8 +24,7 @@ class Forms extends GenericForms implements Htmlable
 
     public function __construct(
         protected ?string $name = null
-    )
-    {
+    ) {
     }
 
     public static function make(string $name = null): static
@@ -65,7 +64,7 @@ class Forms extends GenericForms implements Htmlable
 
     public function action(string|Closure|null $route): static
     {
-        if (!Route::has($route)) {
+        if ( ! Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
         }
         $this->route = $route;

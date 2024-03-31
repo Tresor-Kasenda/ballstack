@@ -16,12 +16,12 @@ class BallStackServiceProvider extends ServiceProvider
 
         $this->configureComponents();
 
-        $this->mergeConfigFrom(__DIR__ . '/../config/ballstack.php', 'ballstack');
+        $this->mergeConfigFrom(__DIR__.'/../config/ballstack.php', 'ballstack');
     }
 
     protected function viewConfig(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ballstack');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'ballstack');
         if ($this->app->runningInConsole()) {
             $this->commands([
                 BallStackCommand::class,
@@ -29,7 +29,7 @@ class BallStackServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__ . '/../config/ballstack.php' => config_path('ballstack.php'),
+            __DIR__.'/../config/ballstack.php' => config_path('ballstack.php'),
         ]);
     }
 
@@ -37,7 +37,7 @@ class BallStackServiceProvider extends ServiceProvider
     {
         $prefix = config('ballstack.prefix');
 
-        Blade::component($prefix . 'logo-guest', 'logo-guest');
+        Blade::component($prefix.'logo-guest', 'logo-guest');
     }
 
     public function register(): void

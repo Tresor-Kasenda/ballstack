@@ -43,8 +43,7 @@ class ToggleButton extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function make(?string $name): static

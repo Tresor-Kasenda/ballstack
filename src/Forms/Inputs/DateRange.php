@@ -14,6 +14,7 @@ use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
 use Tresorkasenda\Forms\GenericForms;
+
 use function view;
 
 class DateRange extends GenericForms implements Htmlable
@@ -29,8 +30,7 @@ class DateRange extends GenericForms implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function make(?string $name): static

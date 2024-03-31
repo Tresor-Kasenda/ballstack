@@ -19,8 +19,7 @@ class ListGroup extends Component implements Htmlable
 
     public function __construct(
         protected string $name
-    )
-    {
+    ) {
     }
 
     public static function mame(string $name = null): static

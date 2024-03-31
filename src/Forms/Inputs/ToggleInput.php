@@ -24,9 +24,8 @@ class ToggleInput extends GenericForms implements Htmlable
 
     public function __construct(
         public string $name,
-    )
-    {
-        $this->uniqueId = uniqid('toggle-' . $this->name, true);
+    ) {
+        $this->uniqueId = uniqid('toggle-'.$this->name, true);
     }
 
     public static function make(?string $name): self

@@ -1,30 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Pages\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('layouts.guest')]
 #[Title('Register')]
 class RegisterComponent extends Component
 {
+    #[Validate(['required', 'string', 'max:255'])]
     public string $name = '';
+
+    #[Validate(['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class])]
     public string $email = '';
+
+    #[Validate(['required', 'string', 'confirmed'])]
     public string $password = '';
+
+    #[Validate(['required', 'string'])]
     public string $password_confirmation = '';
 
-    public function render(): Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|View|Application
+    public function render(): View
     {
         return view('livewire.pages.auth.register-component');
     }
@@ -32,8 +40,6 @@ class RegisterComponent extends Component
     public function register(): void
     {
         $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 

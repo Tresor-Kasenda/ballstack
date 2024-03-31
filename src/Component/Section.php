@@ -58,7 +58,7 @@ class Section extends Component implements Htmlable
 
     public function getSchema(): array
     {
-        return array_map(fn($item) => $item, $this->schema);
+        return array_map(fn ($item) => $item, $this->schema);
     }
 
     public function getTitle(): ?string

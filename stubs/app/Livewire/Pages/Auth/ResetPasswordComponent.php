@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Pages\Auth;
 
 use Illuminate\Contracts\Foundation\Application;
@@ -48,7 +50,7 @@ class ResetPasswordComponent extends Component
 
         $status = Password::reset(
             $this->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user) {
+            function ($user): void {
                 $user->forceFill([
                     'password' => Hash::make($this->password),
                     'remember_token' => Str::random(60),
@@ -58,7 +60,7 @@ class ResetPasswordComponent extends Component
             }
         );
 
-        if ($status != Password::PASSWORD_RESET) {
+        if (Password::PASSWORD_RESET !== $status) {
             $this->addError('email', __($status));
 
             return;

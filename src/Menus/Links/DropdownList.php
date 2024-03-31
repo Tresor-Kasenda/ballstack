@@ -16,8 +16,7 @@ class DropdownList extends Component implements Htmlable
 
     public function __construct(
         protected ?string $name
-    )
-    {
+    ) {
     }
 
     public static function make(?string $name): static

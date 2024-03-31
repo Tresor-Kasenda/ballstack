@@ -40,8 +40,7 @@ class ApexChart extends Component implements Htmlable
 
     public function __construct(
         protected ?string $name
-    )
-    {
+    ) {
     }
 
     public static function make(string $name = null): static

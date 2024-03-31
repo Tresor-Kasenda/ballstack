@@ -25,7 +25,13 @@
         <div class="nk-wrap ">
             {{ $header }}
             <div class="nk-content ">
-                {{ $slot }}
+                <div class="container-fluid">
+                    <div class="nk-content-inner">
+                        <div class="nk-content-body">
+                            {{ $slot }}
+                        </div>
+                    </div>
+                </div>
             </div>
             <x-footer/>
         </div>

@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Livewire\Pages\Auth\ConfirmPassword;
 use App\Livewire\Pages\Auth\LoginComponent;
 use App\Livewire\Pages\Auth\PasswordResetComponent;
 use App\Livewire\Pages\Auth\RegisterComponent;
 use App\Livewire\Pages\Auth\ResetPasswordComponent;
+use App\Livewire\Pages\Auth\VerifyEmail;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => view('welcome'))->name('home');
+Route::get('/', fn () => view('welcome'))->name('home');
 
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', LoginComponent::class)->name('login');
@@ -21,24 +25,14 @@ Route::middleware('guest')->group(function (): void {
 });
 
 Route::middleware('auth')->group(function (): void {
-    Route::get('verify-email', EmailVerificationPromptController::class)
-        ->name('verification.notice');
 
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
-
-    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-        ->middleware('throttle:6,1')
-        ->name('verification.send');
-
-    Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
+    Route::get('confirm-password', ConfirmPassword::class)
         ->name('password.confirm');
 
-    Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+    Route::get('verify-email', VerifyEmail::class)
+        ->name('verification.notice');
 
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
+    Route::get('verify-email/{id}/{hash}', VerifyEmail::class)
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('verification.verify');
 });

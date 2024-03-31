@@ -14,7 +14,7 @@ class LayoutComposer
         $header = Header::make()
             ->image(asset('assets/images/logo.jpg'))
             ->theme('light')
-            ->route('home')
+            ->route('dashboard')
             ->items([
                 // your LinkLayout
             ]);

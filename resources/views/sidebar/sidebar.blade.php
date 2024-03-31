@@ -15,17 +15,17 @@
                 <img
                     class="logo-light logo-img"
                     src="{{ $getImage() }}"
-                    srcset="{{ $getLogo() }} 2x"
+                    srcset="{{ $getImage() }} 2x"
                     alt="{{ $getName() }}">
                 <img
                     class="logo-dark logo-img"
-                    src="{{ $getLogo() }}"
-                    srcset="{{ $getLogo() }} 2x"
+                    src="{{ $getImage() }}"
+                    srcset="{{ $getImage() }} 2x"
                     alt="{{ $getName() }}">
                 <img
                     class="logo-small logo-img logo-img-small"
-                    src="{{ $getLogo() }}"
-                    srcset="{{ $getLogo() }} 2x"
+                    src="{{ $getImage() }}"
+                    srcset="{{ $getImage() }} 2x"
                     alt="{{ $getName() }}">
             </a>
         </div>

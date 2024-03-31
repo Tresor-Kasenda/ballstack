@@ -112,11 +112,5 @@
     <div class="form-note-s2 pt-4">
         <a href="{{ route('login') }}" wire:navigate>Already registered?</a>
     </div>
-    <div class="text-center pt-4 pb-3">
-        <h6 class="overline-title overline-title-sap">
-            <span>OR</span>
-        </h6>
-    </div>
-    <x-auth-social/>
 </div>
 
