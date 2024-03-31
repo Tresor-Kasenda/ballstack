@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/tresor-kasenda/ballstack/assets/Presentation.png" alt="Banner" style="width: 100%; max-width: 800px;" />
+    <img src="https://github.com/Tresor-Kasenda/ballstack/blob/master/assets/Presentation.png" alt="Banner" style="width: 100%; max-width: 800px;" />
 </p>
 
 <p align="center">
