@@ -12,7 +12,7 @@ class SideBarLayout
     public function compose(View $view): void
     {
         $sidebar = Sidebar::make()
-            ->image('images/profile.jpg')
+            ->image('')
             ->theme('dark')
             ->route('dashboard')
             ->icon('menu')

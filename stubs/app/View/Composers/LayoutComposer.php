@@ -12,7 +12,7 @@ class LayoutComposer
     public function compose(View $view): void
     {
         $header = Header::make()
-            ->image(asset('assets/images/logo.jpg'))
+            ->image('')
             ->theme('light')
             ->route('dashboard')
             ->items([
