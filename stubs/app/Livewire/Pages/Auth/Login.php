@@ -19,7 +19,7 @@ use Livewire\Component;
 
 #[Layout('layouts.guest')]
 #[Title('Login')]
-class LoginComponent extends Component
+class Login extends Component
 {
     #[Validate('required|string|email|exists:users')]
     public string $email = '';
@@ -29,7 +29,7 @@ class LoginComponent extends Component
 
     public function render(): View
     {
-        return view('livewire.pages.auth.login-component');
+        return view('livewire.pages.auth.login');
     }
 
     public function login(): void
@@ -47,7 +47,7 @@ class LoginComponent extends Component
     {
         $this->ensureIsNotRateLimited();
 
-        if ( ! Auth::attempt($this->only(['email', 'password']))) {
+        if (!Auth::attempt($this->only(['email', 'password']))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -60,7 +60,7 @@ class LoginComponent extends Component
 
     protected function ensureIsNotRateLimited(): void
     {
-        if ( ! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -78,6 +78,6 @@ class LoginComponent extends Component
 
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->email) . '|' . request()->ip());
     }
 }

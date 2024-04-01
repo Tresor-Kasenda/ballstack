@@ -14,11 +14,11 @@
     <title>{{ config('app.name') }} | {{ $title }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="{{ asset('assets/js/bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/bundle.js') }}" data-navigate-track data-navigate-once></script>
+    <script src="{{ asset('assets/js/scripts.js') }}" data-navigate-track data-navigate-once></script>
     @stack('styles')
 </head>
-<body class="nk-body bg-lighter npc-default has-sidebar ui-bordered">
+<body class="nk-body bg-lighter npc-default has-sidebar ff-base ui-bordered">
 <div class="nk-app-root">
     <div class="nk-main ">
         {{ $sidebar }}

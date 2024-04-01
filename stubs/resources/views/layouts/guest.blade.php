@@ -10,7 +10,7 @@
 
     @vite(['resources/css/app.css'])
 </head>
-<body class="nk-body bg-white npc-default pg-auth">
+<body class="nk-body bg-white npc-default ff-base pg-auth">
 <div class="nk-app-root">
     <div class="nk-main ">
         <div class="nk-wrap nk-wrap-nosidebar">

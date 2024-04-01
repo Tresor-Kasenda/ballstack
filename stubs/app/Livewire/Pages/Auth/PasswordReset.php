@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Livewire\Pages\Auth;
 
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -15,14 +13,14 @@ use Livewire\Component;
 
 #[Layout('layouts.guest')]
 #[Title('Forget Password')]
-class PasswordResetComponent extends Component
+class PasswordReset extends Component
 {
     #[Validate('required|string|email|exists:users')]
     public string $email = '';
 
-    public function render(): Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|View|Application
+    public function render(): View
     {
-        return view('livewire.pages.auth.password-reset-component');
+        return view('livewire.pages.auth.password-reset');
     }
 
     public function sendPasswordReset(): void
