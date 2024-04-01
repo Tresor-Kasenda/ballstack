@@ -2,10 +2,12 @@
     $route = $getRoute();
     $items = $getItems();
     $icon = $getIcon();
+    $name = $getName();
 @endphp
 
 @props([
-    'icons' => $icon
+    'icons' => $icon,
+    'name' => $name
 ])
 
 <div class="nk-sidebar nk-sidebar-fixed is-{{ $getTheme() ?? 'light' }} " data-content="sidebarMenu">

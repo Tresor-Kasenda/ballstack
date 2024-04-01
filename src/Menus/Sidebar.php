@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tresorkasenda\Menus;
 
 use Closure;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
@@ -29,11 +30,12 @@ class Sidebar extends Component implements Htmlable
 
     protected string $route;
 
-    protected array $items = [];
+    protected array|Arrayable $items = [];
 
     public function __construct(
         protected ?string $name = null
-    ) {
+    )
+    {
     }
 
     public static function make(string $name = null): self
@@ -59,7 +61,7 @@ class Sidebar extends Component implements Htmlable
 
     public function route(string|Route $route): static
     {
-        if ( ! Route::has($route)) {
+        if (!Route::has($route)) {
             throw new InvalidArgumentException('The provided route does not exist.');
         }
         $this->route = $route;
@@ -72,7 +74,7 @@ class Sidebar extends Component implements Htmlable
         return route($this->route);
     }
 
-    public function items(array $items): static
+    public function items(array|Arrayable $items): static
     {
         $this->items = array_map(function ($item) {
             if ($item instanceof LinkItems) {
@@ -86,7 +88,7 @@ class Sidebar extends Component implements Htmlable
 
     public function getItems(): array
     {
-        return array_map(fn ($item) => $item, $this->items);
+        return array_map(fn($item) => $item, $this->items);
     }
 
     public function theme(string $theme): static
