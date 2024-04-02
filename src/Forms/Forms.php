@@ -6,7 +6,6 @@ namespace Tresorkasenda\Forms;
 
 use Closure;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use InvalidArgumentException;
@@ -16,7 +15,7 @@ class Forms extends GenericForms implements Htmlable
 {
     protected array|Closure|null $schema = [];
 
-    protected string|Closure|null $route = null;
+    protected string|Closure|null $action = null;
 
     protected int|Closure|null $column = 0;
 
@@ -24,7 +23,8 @@ class Forms extends GenericForms implements Htmlable
 
     public function __construct(
         protected ?string $name = null
-    ) {
+    )
+    {
     }
 
     public static function make(string $name = null): static
@@ -62,19 +62,16 @@ class Forms extends GenericForms implements Htmlable
         return view('ballstack::forms.form-builder', $this->extractPublicMethods());
     }
 
-    public function action(string|Closure|null $route): static
+    public function action(string|Closure|null $action): static
     {
-        if ( ! Route::has($route)) {
-            throw new InvalidArgumentException('The provided route does not exist.');
-        }
-        $this->route = $route;
+        $this->action = $action;
 
         return $this;
     }
 
-    public function getRoute(): string
+    public function getAction(): ?string
     {
-        return $this->route ?? "";
+        return $this->evaluate($this->action);
     }
 
     public function column(int|Closure|null $column): static
@@ -84,9 +81,9 @@ class Forms extends GenericForms implements Htmlable
         return $this;
     }
 
-    public function getColumn(): int|Closure|null
+    public function getColumn(): ?int
     {
-        return $this->column;
+        return $this->evaluate($this->column);
     }
 
     public function hasCard(bool|Closure|null $hasCard = true): static

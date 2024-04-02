@@ -1,6 +1,6 @@
 @php
     $schemas = $getSchema();
-    $route = $getRoute();
+    $action = $getAction();
     $columns = $getColumn();
     $class = $columns == 2 ?
         'col-lg-6 col-md-6 col-sm-12' :
@@ -21,10 +21,13 @@
                             </div>
                         @endforeach
                         <div class="col-12">
-                            <div class="form-group">
+                            <div class="form-group d-flex">
                                 <button type="submit" class="btn btn-dim btn-primary" wire:loading.attr="disabled">
-
+                                    {{ $action ?? __('Submit') }}
                                 </button>
+                                <div wire:loading class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                             </div>
                         </div>
                     </div>
