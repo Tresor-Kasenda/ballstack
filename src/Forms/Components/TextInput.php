@@ -2,27 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
 use Closure;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Livewire\Component;
-use Throwable;
 use Tresorkasenda\Contracts\HasDisabled;
 use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasLabel;
+use Tresorkasenda\Contracts\HasLivewire;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class TextInput extends GenericForms implements Htmlable
+class TextInput extends Field
 {
     use HasDisabled;
     use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
     use HasRequired;
+    use HasLivewire;
 
     protected string|Closure|null $type = "text";
 
@@ -38,51 +36,15 @@ class TextInput extends GenericForms implements Htmlable
 
     protected bool $autocomplete = false;
 
-    protected string $uniqueId;
-
     protected string|Closure|null $prefix = null;
 
     protected string|Closure|null $position = null;
 
-    public function __construct(
-        protected string $name,
-    ) {
-        $this->uniqueId = uniqid('input-'.$this->name, true);
-    }
-
-    public static function make(?string $name): static
-    {
-        return app(static::class, ['name' => $name]);
-    }
+    protected string $view = "ballstack::forms.components.input";
 
     public function getUniqueId(): string
     {
         return $this->evaluate($this->uniqueId);
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
-    }
-
-    public function livewire(Component|Closure $livewire): static
-    {
-        $this->livewire = $livewire;
-
-        return $this;
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('ballstack::forms.input', $this->extractPublicMethods());
     }
 
     public function type(string|Closure $type): self

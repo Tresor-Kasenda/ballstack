@@ -10,7 +10,7 @@ use Illuminate\View\Component;
 use Illuminate\View\View;
 use InvalidArgumentException;
 use Tresorkasenda\Contracts\HasExtractPublicMethods;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\FormComponent;
 
 class Section extends Component implements Htmlable
 {
@@ -47,7 +47,7 @@ class Section extends Component implements Htmlable
     public function schema(array $schema): static
     {
         $this->schema = array_map(function ($schema) {
-            if ($schema instanceof GenericForms || $schema instanceof Component) {
+            if ($schema instanceof FormComponent || $schema instanceof Component) {
                 return $schema;
             }
             throw new InvalidArgumentException('Invalid must be instance of GenerateForms.');
@@ -58,7 +58,7 @@ class Section extends Component implements Htmlable
 
     public function getSchema(): array
     {
-        return array_map(fn ($item) => $item, $this->schema);
+        return array_map(fn($item) => $item, $this->schema);
     }
 
     public function getTitle(): ?string

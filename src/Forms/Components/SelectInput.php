@@ -2,74 +2,43 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
 use Closure;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Illuminate\View\View;
-use Throwable;
 use Tresorkasenda\Contracts\HasDisabled;
-use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
 use Tresorkasenda\Contracts\HasRule;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class SelectInput extends GenericForms implements Htmlable
+class SelectInput extends Field
 {
     use HasDisabled;
-    use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
     use HasRequired;
     use HasRule;
 
     public bool $native = true;
+
     protected array|Collection $options = [];
+
     protected bool $searchable = false;
+
     protected bool $multiple = false;
+
     protected bool $autofocus = false;
+
     protected bool $autocomplete = false;
+
     protected string $autocapitalize = 'off';
-    protected string $uniqueId;
+
     protected bool $live = false;
 
-    public function __construct(
-        public string $name
-    ) {
-        $this->uniqueId = uniqid('select-'.$this->name, true);
-    }
-
-    public static function make(?string $name): static
-    {
-        return new static($name);
-    }
-
-    public function getUniqueId(): string
-    {
-        return $this->evaluate($this->uniqueId);
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('components.forms.select', $this->extractPublicMethods());
-    }
+    protected string $view = "ballstack::forms.components.select";
 
     public function options(array|Closure|null $options): static
     {

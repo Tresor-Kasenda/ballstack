@@ -2,20 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
 use Closure;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Throwable;
-use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class FileUpload extends GenericForms implements Htmlable
+class FileUpload extends Field
 {
-    use HasEvaluated;
     use HasLabel;
     use HasRequired;
 
@@ -43,28 +38,7 @@ class FileUpload extends GenericForms implements Htmlable
     protected bool|Closure $allowRemove = true;
     protected int|Closure $maxParallelUploads = 3;
 
-    public function __construct(
-        public string $name,
-    ) {
-    }
-
-    public static function make(?string $name): static
-    {
-        return new static($name);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('components.forms.file-upload', $this->extractPublicMethods());
-    }
+    protected string $view = "ballstack::forms.components.file-upload";
 
     public function directory(string $directory): static
     {
@@ -97,11 +71,6 @@ class FileUpload extends GenericForms implements Htmlable
     public function isAllowFileTypeValidation(): bool
     {
         return (bool)$this->evaluate($this->allowFileTypeValidation);
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
     }
 
     public function isAllowFileSizeValidation(): bool
@@ -235,15 +204,5 @@ class FileUpload extends GenericForms implements Htmlable
     public function getMaxParallelUploads(): int
     {
         return (int)$this->evaluate($this->maxParallelUploads);
-    }
-
-    public function upload(string $file): void
-    {
-
-    }
-
-    public function removeUpload(string $removeUpload): void
-    {
-
     }
 }

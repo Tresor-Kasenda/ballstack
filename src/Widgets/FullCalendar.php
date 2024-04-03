@@ -13,9 +13,9 @@ use Override;
 use Throwable;
 use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasExtractPublicMethods;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\FormComponent;
 
-class FullCalendar extends GenericForms implements Htmlable
+class FullCalendar extends FormComponent implements Htmlable
 {
     use HasEvaluated;
     use HasExtractPublicMethods;
@@ -32,7 +32,8 @@ class FullCalendar extends GenericForms implements Htmlable
 
     public function __construct(
         protected ?string $name
-    ) {
+    )
+    {
     }
 
     public static function make(?string $name = null): static

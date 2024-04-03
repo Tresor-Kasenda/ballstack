@@ -2,22 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Override;
-use Throwable;
-use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasFormat;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class DatePicker extends GenericForms implements Htmlable
+class DatePicker extends Field
 {
-    use HasEvaluated;
     use HasFormat;
     use HasLabel;
     use HasPlaceholder;
@@ -35,20 +29,7 @@ class DatePicker extends GenericForms implements Htmlable
 
     protected array|null $disable = [];
 
-    public function __construct(
-        protected string $name,
-    ) {
-    }
-
-    public static function make(?string $name): static
-    {
-        return new self($name);
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
-    }
+    protected string $view = "ballstack::forms.components.date-picker";
 
     public function minDate(string $minDate): self
     {
@@ -96,21 +77,6 @@ class DatePicker extends GenericForms implements Htmlable
     public function getEnableTime(): bool
     {
         return $this->evaluate($this->enableTime);
-    }
-
-    /**
-     * @inheritDoc
-     * @throws Throwable
-     */
-    #[Override]
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('components.forms.date-picker', $this->extractPublicMethods());
     }
 
     public function disable(array $dates): self

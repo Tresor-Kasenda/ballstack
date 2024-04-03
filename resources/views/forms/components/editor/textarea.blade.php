@@ -10,8 +10,12 @@
     $length = $getLength();
     $disabled = $isDisabled();
 @endphp
+
+@props([
+    'name' => $name
+])
 <div
-    class="form-group"
+    {{ $attributes->merge(['class' => 'form-group']) }}
     @if($autosize)
         x-data="{
             init() {

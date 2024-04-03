@@ -2,21 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Throwable;
-use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasFormat;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class TimePicker extends GenericForms implements Htmlable
+class TimePicker extends Field
 {
-    use HasEvaluated;
     use HasFormat;
     use HasLabel;
     use HasPlaceholder;
@@ -28,34 +23,7 @@ class TimePicker extends GenericForms implements Htmlable
 
     protected array|null $datalist = [];
 
-    public function __construct(
-        public string $name,
-    ) {
-    }
-
-    public static function make(?string $name): self
-    {
-        return new self($name);
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
-    }
-
-    /**
-     * @inheritDoc
-     * @throws Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('components.forms.time-picker', $this->extractPublicMethods());
-    }
+    protected string $view = "ballstack::forms.components.time-picker";
 
     public function minTime(string $minTime): self
     {

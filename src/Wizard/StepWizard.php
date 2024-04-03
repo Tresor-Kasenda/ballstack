@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Tresorkasenda\Wizard;
 
 use Closure;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Override;
-use Throwable;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class StepWizard extends GenericForms implements Htmlable
+class StepWizard extends Field
 {
     protected string|Closure|null $description = null;
 
@@ -21,31 +17,7 @@ class StepWizard extends GenericForms implements Htmlable
 
     protected Closure|string|null $icon = null;
 
-    public function __construct(
-        protected ?string $name
-    ) {
-    }
-
-    #[Override]
-    public static function make(?string $name): static
-    {
-        return app(static::class, ['name' => $name]);
-    }
-
-    /**
-     * @inheritDoc
-     * @throws Throwable
-     */
-    #[Override]
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('ballstack::forms.wizard.step', $this->extractPublicMethods());
-    }
+    protected string $view = "ballstack::forms.wizard.step";
 
     public function description(string|Closure|null $description): static
     {
@@ -81,11 +53,6 @@ class StepWizard extends GenericForms implements Htmlable
     public function getSchema(): ?array
     {
         return $this->evaluate($this->schema);
-    }
-
-    public function getName(): ?string
-    {
-        return $this->evaluate($this->name);
     }
 
     public function icon(string|Closure|null $icon): static

@@ -20,6 +20,10 @@ trait HasLabel
     public function getLabel()
     {
         return $this->evaluate($this->label ?? null) ??
-            str($this->name)->title();
+            (string)str($this->getName())
+                ->afterLast('.')
+                ->kebab()
+                ->replace(['-', '_'], ' ')
+                ->ucfirst();
     }
 }

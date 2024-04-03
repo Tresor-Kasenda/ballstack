@@ -2,31 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
 use Closure;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Override;
-use Throwable;
-use Tresorkasenda\Contracts\HasEvaluated;
-use Tresorkasenda\Contracts\HasExtractPublicMethods;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
 /**
  * Class AdvancedControl
  *
- * The AdvancedControl class extends the GenericForms class and implements the Htmlable interface.
+ * The AdvancedControl class extends the FormComponent class and implements the Htmlable interface.
  * It provides methods for creating and managing advanced form controls.
  *
  * @package App\View\TallFlex\Forms\Inputs
  */
-class ToggleButton extends GenericForms implements Htmlable
+class ToggleButton extends Field
 {
-    use HasEvaluated;
-    use HasExtractPublicMethods;
     use HasLabel;
     use HasRequired;
 
@@ -39,22 +31,10 @@ class ToggleButton extends GenericForms implements Htmlable
     protected Closure|bool $disabled = false;
 
     protected array|Closure|null $options = [];
+
+    protected string $view = "ballstack::forms.components.toggle";
+
     private Closure|bool $multiple = false;
-
-    public function __construct(
-        protected string $name
-    ) {
-    }
-
-    public static function make(?string $name): static
-    {
-        return app(static::class, ['name' => $name]);
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
-    }
 
     public function mode(string|Closure|null $mode): static
     {
@@ -78,21 +58,6 @@ class ToggleButton extends GenericForms implements Htmlable
     public function getIcons(): array
     {
         return $this->evaluate($this->icons);
-    }
-
-    /**
-     * @inheritDoc
-     * @throws Throwable
-     */
-    #[Override]
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('components.forms.advanced-control', $this->extractPublicMethods());
     }
 
     public function description(string|Closure|null $description): static

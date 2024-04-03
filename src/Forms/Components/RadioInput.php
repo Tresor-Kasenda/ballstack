@@ -2,21 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Throwable;
 use Tresorkasenda\Contracts\HasChecked;
-use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class RadioInput extends GenericForms implements Htmlable
+class RadioInput extends Field
 {
     use HasChecked;
-    use HasEvaluated;
     use HasLabel;
     use HasRequired;
 
@@ -24,15 +19,7 @@ class RadioInput extends GenericForms implements Htmlable
 
     protected bool $inline = false;
 
-    public function __construct(
-        public string $name
-    ) {
-    }
-
-    public static function make(string $name): static
-    {
-        return new static($name);
-    }
+    protected string $view = "ballstack::forms.components.radio";
 
     public function inline(): static
     {
@@ -66,18 +53,5 @@ class RadioInput extends GenericForms implements Htmlable
     public function getOptions(): array
     {
         return $this->evaluate($this->options);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('components.forms.radio', $this->extractPublicMethods());
     }
 }

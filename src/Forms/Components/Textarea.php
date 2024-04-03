@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Editor;
+namespace Tresorkasenda\Forms\Components;
 
 use Closure;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Throwable;
 use Tresorkasenda\Contracts\HasDisabled;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasReadOnly;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class Textarea extends GenericForms implements Htmlable
+class Textarea extends Field
 {
     use HasDisabled;
     use HasLabel;
@@ -30,15 +27,7 @@ class Textarea extends GenericForms implements Htmlable
     protected int|Closure|null $cols = null;
     protected bool $autosize = false;
 
-    public function __construct(
-        protected string $name
-    ) {
-    }
-
-    public static function make(?string $name): static
-    {
-        return new static($name);
-    }
+    protected string $view = "ballstack::forms.components.editor.textarea";
 
     public function getLength(): ?int
     {
@@ -89,18 +78,5 @@ class Textarea extends GenericForms implements Htmlable
     public function getName(): ?string
     {
         return $this->evaluate($this->name);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('ballstack::forms.editor.textarea', $this->extractPublicMethods());
     }
 }

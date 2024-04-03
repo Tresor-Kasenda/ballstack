@@ -8,13 +8,14 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Override;
 use Throwable;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\FormComponent;
 
-class Dropdown extends GenericForms implements Htmlable
+class Dropdown extends FormComponent implements Htmlable
 {
     public function __construct(
         protected string $name
-    ) {
+    )
+    {
     }
 
     public static function make(string $name = null): static

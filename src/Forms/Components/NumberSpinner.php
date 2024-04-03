@@ -2,21 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Forms\Inputs;
+namespace Tresorkasenda\Forms\Components;
 
 use Closure;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\View;
-use Throwable;
-use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\Field;
 
-class NumberSpinner extends GenericForms implements Htmlable
+class NumberSpinner extends Field
 {
-    use HasEvaluated;
     use HasLabel;
     use HasPlaceholder;
     use HasRequired;
@@ -29,21 +24,7 @@ class NumberSpinner extends GenericForms implements Htmlable
 
     protected string $uniqueId;
 
-    public function __construct(
-        public string $name
-    ) {
-        $this->uniqueId = uniqid('input-'.$this->name, true);
-    }
-
-    public static function make(?string $name): static
-    {
-        return new static($name);
-    }
-
-    public function getUniqueId(): string
-    {
-        return $this->evaluate($this->uniqueId);
-    }
+    protected string $view = "ballstack::forms.components.number-spinner";
 
     public function getMin(): int|Closure|null
     {
@@ -76,23 +57,5 @@ class NumberSpinner extends GenericForms implements Htmlable
     {
         $this->step = $step;
         return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->evaluate($this->name);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
-
-    public function render(): View
-    {
-        return view('components.forms.number-spinner', $this->extractPublicMethods());
     }
 }

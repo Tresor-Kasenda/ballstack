@@ -13,7 +13,7 @@ use ReflectionClass;
 use Throwable;
 use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasExtractPublicMethods;
-use Tresorkasenda\Forms\GenericForms;
+use Tresorkasenda\Forms\FormComponent;
 
 class Tab extends Component implements Htmlable
 {
@@ -27,7 +27,8 @@ class Tab extends Component implements Htmlable
 
     public function __construct(
         protected string $name
-    ) {
+    )
+    {
     }
 
     public static function make(string $name)
@@ -56,7 +57,7 @@ class Tab extends Component implements Htmlable
             ->getName();
 
         $this->schema = array_map(function ($schema) use ($parentClass) {
-            if ($schema instanceof GenericForms || $schema instanceof Component) {
+            if ($schema instanceof FormComponent || $schema instanceof Component) {
                 return $schema;
             }
 
@@ -109,6 +110,6 @@ class Tab extends Component implements Htmlable
 
     public function getSchema(): array
     {
-        return array_map(fn ($item) => $item, $this->schema);
+        return array_map(fn($item) => $item, $this->schema);
     }
 }
