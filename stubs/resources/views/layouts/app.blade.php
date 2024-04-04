@@ -17,6 +17,7 @@
     <script src="{{ asset('assets/js/bundle.js') }}" data-navigate-track data-navigate-once></script>
     <script src="{{ asset('assets/js/scripts.js') }}" data-navigate-track data-navigate-once></script>
     @stack('styles')
+    @ballStackScripts
 </head>
 <body class="nk-body bg-lighter npc-default has-sidebar ff-base ui-bordered">
 <div class="nk-app-root">
