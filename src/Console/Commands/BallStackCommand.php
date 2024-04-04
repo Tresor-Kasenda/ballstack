@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tresorkasenda\Console;
+namespace Tresorkasenda\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

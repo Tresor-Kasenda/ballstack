@@ -34,11 +34,17 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-dim btn-primary" wire:loading.attr="disabled">
-                                    {{ $action ?? __('Submit') }}
+                                    <div
+                                        wire:loading.delay.long
+                                        wire:loading.flex
+                                        wire:target="submit"
+                                        class="spinner-border spinner-border-sm" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <span wire:loading.class="invisible" wire:target="submit">
+                                       {{ $action ?? __('Submit') }}
+                                    </span>
                                 </button>
-                                <div wire:loading.delay.long class="spinner-border spinner-border-sm" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
                             </div>
                         </div>
                     </div>

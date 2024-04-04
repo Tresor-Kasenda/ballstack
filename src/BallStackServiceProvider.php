@@ -7,7 +7,7 @@ namespace Tresorkasenda;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Tresorkasenda\Assets\AssetManager;
-use Tresorkasenda\Console\BallStackCommand;
+use Tresorkasenda\Console\Commands\BallStackCommand;
 use Tresorkasenda\Facades\BallStackAsset;
 
 class BallStackServiceProvider extends ServiceProvider
