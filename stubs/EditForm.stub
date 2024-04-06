@@ -1,0 +1,43 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Models\{{ model }};
+use Livewire\Component;
+use Illuminate\Contracts\View\View;
+
+class {{ class }} extends Component
+{
+    public {{ modelClass }} $record;
+
+    public function mount({{ modelClass }} $record): void
+    {
+
+    }
+
+    public function form(): Form
+    {
+        return Forms::make()
+            ->hasCard()
+            ->schema([
+{{ schema }}
+            ])
+            ->action(__('Sauvgarder {{ class }}'));
+    }
+
+    public function save(): void
+    {
+        $data = $this->validate();
+
+        $this->record->filled($data);
+
+        $this->record->update($data);
+
+        $this->redirectRoute(name: "{{ route }}", navigate: true);
+    }
+
+    public function render(): View
+    {
+        return view('{{ view }}');
+    }
+}
