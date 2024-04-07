@@ -33,9 +33,10 @@
     },
     "require": {
         "php": "^8.3",
-        "illuminate/console": "^10.48.4| 11.0",
-        "illuminate/support": "^10.48.4| 11.0",
-        "illuminate/view": "^10.48.4| 11.0"
+        "illuminate/console": "^10.48.4",
+        "illuminate/support": "^10.48.4",
+        "illuminate/view": "^10.48.4",
+        "laravel/prompts": "^0.1.17"
     },
     "require-dev": {
         "larastan/larastan": "^2.8",

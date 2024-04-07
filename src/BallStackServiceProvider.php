@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Tresorkasenda\Assets\AssetManager;
 use Tresorkasenda\Console\Commands\BallStackCommand;
 use Tresorkasenda\Console\Commands\MakeFormCommand;
+use Tresorkasenda\Console\Commands\MakeUserCommand;
 use Tresorkasenda\Facades\BallStackAsset;
 
 class BallStackServiceProvider extends ServiceProvider
@@ -44,7 +45,8 @@ class BallStackServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 BallStackCommand::class,
-                MakeFormCommand::class
+                MakeFormCommand::class,
+                MakeUserCommand::class
             ]);
         }
 
