@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Tresorkasenda\Console\Commands;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\EloquentUserProvider;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Tresorkasenda\Ballstack\Ballstack;
@@ -39,27 +38,11 @@ class MakeUserCommand extends Command
         return static::SUCCESS;
     }
 
-    protected function createUser(): Authenticatable
+    private function createUser(): User
     {
-        return static::getUserModel()::create($this->getUserData());
-    }
+        $user = $this->getUserData();
 
-    protected function getUserModel(): string
-    {
-        /** @var EloquentUserProvider $provider */
-        $provider = $this->getUserProvider();
-
-        return $provider->getModel();
-    }
-
-    protected function getUserProvider(): UserProvider
-    {
-        return $this->getAuthGuard()->getProvider();
-    }
-
-    protected function getAuthGuard(): Guard
-    {
-        return Filament::auth();
+        return User::query()->create($user);
     }
 
     protected function getUserData(): array
@@ -69,13 +52,12 @@ class MakeUserCommand extends Command
                     label: 'Name',
                     required: true,
                 ),
-
             'email' => $this->options['email'] ?? text(
                     label: 'Email address',
                     required: true,
                     validate: fn(string $email): ?string => match (true) {
                         !filter_var($email, FILTER_VALIDATE_EMAIL) => 'The email address must be valid.',
-                        static::getUserModel()::where('email', $email)->exists() => 'A user with this email address already exists',
+                        User::query()->where('email', $email)->exists() => 'A user with this email address already exists',
                         default => null,
                     },
                 ),
@@ -87,10 +69,8 @@ class MakeUserCommand extends Command
         ];
     }
 
-    protected function sendSuccessMessage(Authenticatable $user): void
+    protected function sendSuccessMessage(User $user): void
     {
-        $loginUrl = Filament::getLoginUrl();
-
-        $this->components->info('Success! ' . ($user->getAttribute('email') ?? $user->getAttribute('username') ?? 'You') . " may now log in at {$loginUrl}");
+        $this->components->info('Success! ');
     }
 }
