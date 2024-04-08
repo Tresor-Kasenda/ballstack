@@ -27,7 +27,7 @@ class MakeUserCommand extends Command
         $this->options = $this->options();
 
         if (!Ballstack::getPanel()) {
-            $this->error('Ballstack has not been installed yet: php artisan ballstack:install');
+            $this->components->error('Ballstack has not been installed yet: php artisan ballstack:install');
 
             return static::INVALID;
         }
@@ -71,6 +71,6 @@ class MakeUserCommand extends Command
 
     protected function sendSuccessMessage(User $user): void
     {
-        $this->components->info('Success! ');
+        $this->components->info('Success! Your account has been created ' . $user?->email . ' with successfully');
     }
 }
