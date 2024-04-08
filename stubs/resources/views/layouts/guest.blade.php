@@ -8,7 +8,28 @@
 
     <title>{{ $title }} | {{ config('app.name') }}</title>
 
+    <style>
+        [x-cloak=''],
+        [x-cloak='x-cloak'],
+        [x-cloak='1'] {
+            display: none !important;
+        }
+
+        @media (max-width: 1023px) {
+            [x-cloak='-lg'] {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            [x-cloak='lg'] {
+                display: none !important;
+            }
+        }
+    </style>
+
     @vite(['resources/css/app.css'])
+
 </head>
 <body class="nk-body bg-white npc-default ff-base pg-auth">
 <div class="nk-app-root">

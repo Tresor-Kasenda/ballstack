@@ -18,13 +18,13 @@ use Tresorkasenda\Contracts\HasSchema;
 
 class FormComponent extends Component implements Htmlable
 {
+    use BelongsToParent;
+    use HasColumns;
+    use HasDisplayedCard;
     use HasEvaluated;
     use HasExtractPublicMethods;
-    use BelongsToParent;
-    use HasSchema;
-    use HasDisplayedCard;
-    use HasColumns;
     use HasLivewire;
+    use HasSchema;
 
     public function __construct(
         protected ?string $name = null

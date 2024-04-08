@@ -29,17 +29,11 @@ class BallStackServiceProvider extends ServiceProvider
 
         ], 'tresorkasenda/ballstack');
 
-        Blade::directive('ballStackScripts', function (string $expression): string {
-            return "<?php echo \Tresorkasenda\Facades\BallStackAsset::renderScripts({$expression}) ?>";
-        });
+        Blade::directive('ballStackScripts', fn(string $expression): string => "<?php echo \Tresorkasenda\Facades\BallStackAsset::renderScripts({$expression}) ?>");
 
-        Blade::directive('ballStackStyles', function (string $expression): string {
-            return "<?php echo \Tresorkasenda\Facades\BallStackAsset::renderStyles({$expression}) ?>";
-        });
+        Blade::directive('ballStackStyles', fn(string $expression): string => "<?php echo \Tresorkasenda\Facades\BallStackAsset::renderStyles({$expression}) ?>");
 
-        Blade::extend(function ($view) {
-            return preg_replace('/\s*@trim\s*/m', '', $view);
-        });
+        Blade::extend(fn($view) => preg_replace('/\s*@trim\s*/m', '', $view));
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ballstack');
         if ($this->app->runningInConsole()) {

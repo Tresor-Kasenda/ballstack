@@ -18,9 +18,9 @@ class TextInput extends Field
     use HasDisabled;
     use HasEvaluated;
     use HasLabel;
+    use HasLivewire;
     use HasPlaceholder;
     use HasRequired;
-    use HasLivewire;
 
     protected string|Closure|null $type = "text";
 

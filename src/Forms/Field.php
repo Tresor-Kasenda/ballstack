@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tresorkasenda\Forms;
 
 use Illuminate\Contracts\Support\Htmlable;
@@ -13,10 +15,10 @@ use Tresorkasenda\Contracts\HasName;
 
 class Field extends Component implements Htmlable
 {
+    use HasEvaluated;
+    use HasExtractPublicMethods;
     use HasLabel;
     use HasName;
-    use HasExtractPublicMethods;
-    use HasEvaluated;
 
     protected string $uniqueId;
 

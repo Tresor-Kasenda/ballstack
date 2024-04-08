@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tresorkasenda\Contracts;
 
 use Livewire\Component;
@@ -22,6 +24,6 @@ trait BelongsToParent
 
     public function isRoot(): bool
     {
-        return $this->parentComponent === null;
+        return null === $this->parentComponent;
     }
 }

@@ -17,6 +17,27 @@
     <script src="{{ asset('assets/js/bundle.js') }}" data-navigate-track data-navigate-once></script>
     <script src="{{ asset('assets/js/scripts.js') }}" data-navigate-track data-navigate-once></script>
     @stack('styles')
+
+    <style>
+        [x-cloak=''],
+        [x-cloak='x-cloak'],
+        [x-cloak='1'] {
+            display: none !important;
+        }
+
+        @media (max-width: 1023px) {
+            [x-cloak='-lg'] {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            [x-cloak='lg'] {
+                display: none !important;
+            }
+        }
+    </style>
+
     @ballStackScripts
 </head>
 <body class="nk-body bg-lighter npc-default has-sidebar ff-base ui-bordered">

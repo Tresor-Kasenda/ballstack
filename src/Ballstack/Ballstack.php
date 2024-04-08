@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tresorkasenda\Ballstack;
 
 use Illuminate\Support\ServiceProvider;

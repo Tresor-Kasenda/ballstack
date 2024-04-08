@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tresorkasenda\Facades;
 
 use Illuminate\Support\Facades\Facade;
@@ -20,7 +22,7 @@ class BallStackAsset extends Facade
      */
     public static function register(array $assets, string $package = 'app'): void
     {
-        static::resolved(function (AssetManager $assetManager) use ($assets, $package) {
+        static::resolved(function (AssetManager $assetManager) use ($assets, $package): void {
             $assetManager->register($assets, $package);
         });
     }
@@ -30,7 +32,7 @@ class BallStackAsset extends Facade
      */
     public static function registerCssVariables(array $variables, ?string $package = null): void
     {
-        static::resolved(function (AssetManager $assetManager) use ($variables, $package) {
+        static::resolved(function (AssetManager $assetManager) use ($variables, $package): void {
             $assetManager->registerCssVariables($variables, $package);
         });
     }
@@ -40,7 +42,7 @@ class BallStackAsset extends Facade
      */
     public static function registerScriptData(array $data, ?string $package = null): void
     {
-        static::resolved(function (AssetManager $assetManager) use ($data, $package) {
+        static::resolved(function (AssetManager $assetManager) use ($data, $package): void {
             $assetManager->registerScriptData($data, $package);
         });
     }

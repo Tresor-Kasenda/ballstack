@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tresorkasenda\Concerns;
 
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
