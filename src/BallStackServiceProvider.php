@@ -36,6 +36,7 @@ class BallStackServiceProvider extends ServiceProvider
         Blade::extend(fn($view) => preg_replace('/\s*@trim\s*/m', '', $view));
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ballstack');
+
         if ($this->app->runningInConsole()) {
             $this->commands([
                 BallStackCommand::class,

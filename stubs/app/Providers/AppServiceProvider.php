@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('layouts.app', config('ballstack.layout.header'));
-        view()->composer('layouts.app', config('ballstack.layout.sidebar'));
+        view()->composer('layouts.app', config('ballstack.components.layout.header'));
+        view()->composer('layouts.app', config('ballstack.components.layout.sidebar'));
     }
 }

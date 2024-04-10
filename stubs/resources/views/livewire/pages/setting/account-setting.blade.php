@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <div>
     <x-setting-aside>
         <x-slot:title>
@@ -34,16 +35,20 @@
                             <div class="nk-block-actions flex-shrink-sm-0">
                                 <ul class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
                                     <li class="order-md-last">
-                                        <a href="#" class="btn btn-primary">Change Password</a>
+                                        <a href="{{ route('update-password') }}" wire:navigate class="btn btn-primary">
+                                            Change Password
+                                        </a>
                                     </li>
                                     <li>
-                                        <em class="text-soft text-date fs-12px">Last changed:
-                                            <span>Oct 2, 2019</span></em>
+                                        <em class="text-soft text-date fs-12px">
+                                            Last changed:
+                                            <span>{{ Auth::user()?->updated_at->format('D, M, Y') }}</span>
+                                        </em>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                    </div><!-- .card-inner -->
+                    </div>
                     <div class="card-inner">
                         <div class="between-center flex-wrap flex-md-nowrap g-3">
                             <div class="nk-block-text">

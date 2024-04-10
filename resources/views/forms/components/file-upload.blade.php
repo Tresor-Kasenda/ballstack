@@ -7,9 +7,7 @@
     $fileSize = $getFileSize();
     $accepts = $getAccepts();
 @endphp
-<div
-    class="form-group"
-    wire:ignore
+<x-ballstack::Inputs.control
     x-data="{
         initFilePond() {
             @if($isAllowFileSizeValidation())
@@ -58,7 +56,7 @@
     x-init="initFilePond"
 >
     @if($label)
-        <label class="form-label" for="{{ $name }}">{{ $label }}</label>
+        <x-ballstack::Inputs.label>{{ $label }}</x-ballstack::Inputs.label>
     @endif
     <div class="form-control-wrap ">
         <input
@@ -74,7 +72,7 @@
             @if($fileSize)data-max-file-size="{{ $fileSize }}" @endif
         >
     </div>
-</div>
+</x-ballstack::Inputs.control>
 
 @push('styles')
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">

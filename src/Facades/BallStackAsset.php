@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tresorkasenda\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Tresorkasenda\Assets\Asset;
 use Tresorkasenda\Assets\AssetManager;
 
 /**
@@ -12,6 +13,9 @@ use Tresorkasenda\Assets\AssetManager;
  */
 class BallStackAsset extends Facade
 {
+    /**
+     * @return string
+     */
     public static function getFacadeAccessor(): string
     {
         return AssetManager::class;

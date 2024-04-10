@@ -25,7 +25,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="email"
+                    wire:model.live="email"
                     id="email"
                     name="email"
                     required
@@ -46,7 +46,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="password"
+                    wire:model.live="password"
                     id="password"
                     name="password"
                     required
@@ -66,7 +66,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="password_confirmation"
+                    wire:model.live="password_confirmation"
                     id="password_confirmation"
                     name="password_confirmation"
                     required

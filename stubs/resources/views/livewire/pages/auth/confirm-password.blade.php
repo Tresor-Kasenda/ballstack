@@ -25,7 +25,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="password"
+                    wire:model.live="password"
                     id="password"
                     name="password"
                     required

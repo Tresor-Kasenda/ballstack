@@ -14,6 +14,9 @@
         </a>
     </div>
     <div class="nk-block-head">
+        <div class="mb-4 text-sm">
+            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+        </div>
         <div class="nk-block-head-content">
             @if (session('status') == 'verification-link-sent')
                 <div class="text-primary">
@@ -22,12 +25,13 @@
             @endif
         </div>
     </div>
-    <div class="d-flex">
-        <x-primary-button wire:click="sendVerification">
+    <div class="d-flex gap gap-20px">
+        <x-primary-button wire:click="sendVerification" class="btn btn-outline-primary btn-dim">
             {{ __('Resend Verification Email') }}
         </x-primary-button>
 
-        <x-primary-button type="submit" wire:click="logout">
+        <x-primary-button type="submit" wire:click="logout" class="btn btn-outline-danger btn-dim"
+                          style="margin-left: 0.5rem">
             {{ __('Log Out') }}
         </x-primary-button>
     </div>

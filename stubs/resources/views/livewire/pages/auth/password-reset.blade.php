@@ -31,7 +31,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="email"
+                    wire:model.live="email"
                     id="email"
                     name="email"
                     required

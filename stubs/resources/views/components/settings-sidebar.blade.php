@@ -1,4 +1,5 @@
 <div
+    wire:ignore
     class="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg"
     data-content="userAside" data-toggle-screen="lg" data-toggle-overlay="true">
     <div class="card-inner-group" data-simplebar>
@@ -8,8 +9,8 @@
                     <span>{{ strtoupper(substr(auth()->user()->name,0, 2)) }}</span>
                 </div>
                 <div class="user-info">
-                    <span class="lead-text">{{ auth()->user()->name }}</span>
-                    <span class="sub-text">{{ auth()->user()->email }}</span>
+                    <span class="lead-text">{{ auth()->user()?->name }}</span>
+                    <span class="sub-text">{{ auth()->user()?->email }}</span>
                 </div>
                 <div class="user-action">
                     <div class="dropdown">
@@ -19,15 +20,15 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <ul class="link-list-opt no-bdr">
                                 <li>
-                                    <a href="#">
+                                    <a href="#" wire:navigate>
                                         <em class="icon ni ni-camera-fill"></em>
                                         <span>Change Photo</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('update-profile') }}" wire:navigate>
                                         <em class="icon ni ni-edit-fill"></em>
-                                        <span>Update Profile</span>
+                                        <span>{{ __('Update Profile') }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -38,16 +39,17 @@
         </div>
         <div class="card-inner">
             <div class="user-account-info py-0">
-                <h6 class="overline-title-alt">Account Balance</h6>
-                <div class="user-balance">
-                    12.395769
-                    <small class="currency currency-btc">USD</small>
+                <h6 class="overline-title-alt">{{ __('Profile User') }}</h6>
+                <div class="user-balance-sub">
+                    <span class="fw-medium fs-14px">Name : </span>
+                    <span>
+                        {{ auth()->user()->name ?? '' }}
+                    </span>
                 </div>
                 <div class="user-balance-sub">
-                    Pending
+                    <span class="fw-medium fs-14px">Email : </span>
                     <span>
-                        0.344939
-                        <span class="currency currency-btc">USD</span>
+                        {{ auth()->user()->email ?? '' }}
                     </span>
                 </div>
             </div>

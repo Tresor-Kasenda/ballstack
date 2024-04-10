@@ -40,7 +40,7 @@ class TextInput extends Field
 
     protected string|Closure|null $position = null;
 
-    protected string $view = "ballstack::forms.components.input";
+    protected string $view = "ballstack::forms.components.text-input";
 
     public function getUniqueId(): string
     {

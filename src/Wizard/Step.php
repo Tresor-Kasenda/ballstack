@@ -7,7 +7,7 @@ namespace Tresorkasenda\Wizard;
 use Closure;
 use Tresorkasenda\Forms\Field;
 
-class StepWizard extends Field
+class Step extends Field
 {
     protected string|Closure|null $description = null;
 

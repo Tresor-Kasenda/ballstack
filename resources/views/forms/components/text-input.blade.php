@@ -23,12 +23,12 @@
     'label' => $label,
     'type' => $type,
 ])
-
-<div class="form-group">
+<x-ballstack::Inputs.control>
     @if($label)
-        <label class="form-label" for="{{ $uniqueId }}">{{ $label }}</label>
+        <x-ballstack::Inputs.label :name="$uniqueId">
+            {{ $label }}
+        </x-ballstack::Inputs.label>
     @endif
-
     <div class="form-control-wrap">
         <div class="input-group">
             @if($getPosition() === 'left')
@@ -52,9 +52,9 @@
                     @if($readOnly)readonly @endif
                     @if($disable)disabled @endif
                     @if($step)step="{{ $step }}" @endif
-                    @if($autocomplete)autocomplete="" @endif
+                    @if($autocomplete)autocomplete="true" @endif
                     @if($autofocus) autofocus @endif
-                    wire:model="{{ $name }}"
+                    wire:model.live="{{ $name }}"
                 >
             @elseif($getPosition() === 'right')
                 <input
@@ -72,7 +72,7 @@
                     @if($step)step="{{ $step }}" @endif
                     @if($autocomplete)autocomplete="" @endif
                     @if($autofocus) autofocus @endif
-                    wire:model="{{ $name }}"
+                    wire:model.live="{{ $name }}"
                 >
                 @if($prefix)
                     <div class="input-group-prepend">
@@ -97,7 +97,7 @@
                     @if($step)step="{{ $step }}" @endif
                     @if($autocomplete)autocomplete="" @endif
                     @if($autofocus) autofocus @endif
-                    wire:model="{{ $name }}"
+                    wire:model.live="{{ $name }}"
                 >
             @endif
         </div>
@@ -109,4 +109,4 @@
             <small class="form-text text-muted">{{ $helpText }}</small>
         @endif
     </div>
-</div>
+</x-ballstack::Inputs.control>

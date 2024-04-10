@@ -18,14 +18,14 @@
             <h5 class="nk-block-title">Register</h5>
         </div>
     </div>
-    <form wire:submit.prevent="register" method="post">
+    <form wire:submit="register" method="post">
         <div class="form-group">
             <div class="form-label-group">
                 <x-label :value="__('Name')" for="name"/>
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="name"
+                    wire:model.live="name"
                     id="name"
                     name="name"
                     required
@@ -46,7 +46,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="email"
+                    wire:model.live="email"
                     id="email"
                     name="email"
                     required
@@ -67,7 +67,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="password"
+                    wire:model.live="password"
                     id="password"
                     name="password"
                     autocomplete="password"
@@ -87,7 +87,7 @@
             </div>
             <div class="form-control-wrap">
                 <x-text-input
-                    wire:model="password_confirmation"
+                    wire:model.live="password_confirmation"
                     id="password_confirmation"
                     name="password_confirmation"
                     required

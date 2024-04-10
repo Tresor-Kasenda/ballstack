@@ -3,54 +3,30 @@
     $action = $getAction();
     $card = $isCard();
 @endphp
+
 @props([
     'schemas' => $schemas,
     'action' => $action,
     'card' => $card,
 ])
 
-<div {{ $attributes->merge(['class' => 'nk-block nk-block-lg']) }}>
+<x-ballstack::card.bloc>
     @if($card)
-        <div class="card">
-            <div class="card-body pb-2">
-                @endif
-                <form wire:submit.prevent="submit" enctype="multipart/form-data">
-                    <div class="row g-4">
-                        @foreach($schemas as $index => $schema)
-                            <div
-                                @class([
-                                    '',
-                                    match ($getColumn()) {
-                                        2 => 'col-lg-6 col-md-6 col-sm-12',
-                                        3 => 'col-lg-4 col-md-4 col-sm-12',
-                                        4 => 'col-lg-3 col-md-3 col-sm-12',
-                                        default => 'col-sm-12'
-                                    }
-                                ])
-                            >
-                                {{ $schema }}
-                            </div>
-                        @endforeach
-                        <div class="col-12">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-dim btn-primary" wire:loading.attr="disabled">
-                                    <div
-                                        wire:loading.delay.long
-                                        wire:loading.flex
-                                        wire:target="submit"
-                                        class="spinner-border spinner-border-sm" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                    <span wire:loading.class="invisible" wire:target="submit">
-                                       {{ $action ?? __('Submit') }}
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                @if($card)
-            </div>
-        </div>
+        <x-ballstack::card>
+            @endif
+            <x-ballstack::form wire:submit.prevent="submit">
+                <div class="row g-4">
+                    @foreach($schemas as $index => $schema)
+                        <x-ballstack::form.form-row wire:key="{{ $index }}" :key="$index" :column="$getColumn()">
+                            {{ $schema }}
+                        </x-ballstack::form.form-row>
+                    @endforeach
+                    <x-ballstack::button
+                        :action="$action"
+                    ></x-ballstack::button>
+                </div>
+            </x-ballstack::form>
+            @if($card)
+        </x-ballstack::card>
     @endif
-</div>
+</x-ballstack::card.bloc>
