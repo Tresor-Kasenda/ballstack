@@ -60,17 +60,17 @@ class UpdatePassword extends Component
                     ->label(__('Adresse Email'))
                     ->email()
                     ->required()
-                    ->autocomplete('email'),
+                    ->autocomplete(),
                 TextInput::make('password')
                     ->label(__('Mot de passe'))
                     ->password()
                     ->required()
-                    ->minLength('6'),
+                    ->minLength(6),
                 TextInput::make('password_confirmation')
                     ->label(__('Mot de passe (confirmation)'))
                     ->password()
                     ->required()
-                    ->minLength('6')
+                    ->minLength(6)
             ])
             ->action(__('Reset Password'));
     }
