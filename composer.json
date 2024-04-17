@@ -34,7 +34,7 @@
     "require": {
         "php": "^8.3",
         "binafy/laravel-stub": "^1.0",
-        "illuminate/support": "^10.45|^11.0",
+        "illuminate/support": "^10.48|^11.1",
         "laravel/prompts": "^0.1.17"
     },
     "require-dev": {
