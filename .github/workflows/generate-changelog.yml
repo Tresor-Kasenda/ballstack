@@ -1,0 +1,29 @@
+name: Generate Changelog
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    generate_changelog:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout Repository
+                uses: actions/checkout@v2
+
+            -   name: Install Dependencies
+                run: npm install -g auto-changelog
+
+            -   name: Generate Changelog
+                id: changelog
+                run: auto-changelog --stdout --template keepachangelog > CHANGELOG.md
+
+            -   name: Commit Changelog
+                run: |
+                    git config user.name "GitHub Actions"
+                    git config user.email "<>"
+                    git add CHANGELOG.md
+                    git commit -m "Update Changelog [skip ci]"
+                    git push
