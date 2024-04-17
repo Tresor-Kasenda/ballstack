@@ -4,24 +4,26 @@ namespace {{ namespace }};
 
 use App\Models\{{ model }};
 use Livewire\Component;
-use Illuminate\Contracts\View\View;
+use Livewire\WithFileUploads;
+use Tresorkasenda\Forms\Forms;
 
 class {{ class }} extends Component
 {
+    use WithFileUploads;
 
     public function mount(): void
     {
-        $this->form->fill();
+       //
     }
 
-    public function form(): Form
+    public function form(): Forms
     {
         return Forms::make()
             ->hasCard()
             ->schema([
     {{ schema }}
             ])
-            ->action(__('Sauvgarder {{ class }}'));
+            ->action(__('Save'));
     }
 
     public function create(): void
@@ -33,7 +35,7 @@ class {{ class }} extends Component
         $this->redirectRoute(name: "/{{ route }}", navigate: true);
     }
 
-    public function render(): View
+    public function render(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
     {
         return view('{{ view }}');
     }

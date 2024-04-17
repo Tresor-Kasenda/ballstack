@@ -7,12 +7,17 @@ namespace Tresorkasenda\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Tresorkasenda\Contracts\Generators\HasContentGenerator;
+use Tresorkasenda\Contracts\Stubs\CanManipulateFiles;
 use function Laravel\Prompts\select;
 use function Laravel\Prompts\text;
 
 
 class MakeFormCommand extends Command
 {
+    use CanManipulateFiles;
+    use HasContentGenerator;
+
     protected $signature = 'make:ballstack-form
                                         {name? : The name of the ballstack Class form}
                                         {model? : The name of the model}
@@ -34,7 +39,7 @@ class MakeFormCommand extends Command
             ->trim(' ')
             ->replace('/', '\\');
 
-        $componentClass = (string)str($component)->afterLast('\\');
+        $componentClass = (string)str($component)->append('Form')->afterLast('\\');
         $componentNamespace = str($component)->contains('\\') ? (string)str($component)->beforeLast('\\') : '';
 
         $view = str($component)
@@ -69,6 +74,7 @@ class MakeFormCommand extends Command
             ->prepend(app_path('Livewire/'))
             ->replace('\\', '/')
             ->replace('//', '/')
+            ->append('Form')
             ->append('.php');
 
         $viewPath = resource_path(
@@ -77,25 +83,41 @@ class MakeFormCommand extends Command
                 ->prepend('views/')
                 ->append('.blade.php'),
         );
-//        dd(
-//            viewPath: $viewPath,
-//            path: $path,
-//            modelClass: $modelClass,
-//            isEditForm: $isEditForm,
-//            model: $model,
-//            view: $view,
-//            componentClass: $componentClass,
-//            componentNamespace: $componentNamespace,
-//            component: $component
-//        );
-        $createClassStubs = File::get(__DIR__ . '/../../../stubs/CreateForm.stub');
-        $updateClassStubs = File::get(__DIR__ . '/../../../stubs/EditForm.stub');
-        $formStubs = File::get(__DIR__ . '/../../../stubs/FormView.stub');
+
+        $this->checkIfModelExist($model);
+
+        if (!$this->option('force') && $this->checkIfComponentExists([$path, $viewPath])) {
+            return;
+        }
+
+        $this->copyStub(filled($model) ? ($isEditForm ? 'EditForm' : 'CreateForm') : 'Form', $path, [
+            'class' => $componentClass,
+            'model' => $model,
+            'modelClass' => $modelClass,
+            'namespace' => 'App\\Livewire' . ($componentNamespace !== '' ? "\\{$componentNamespace}" : ''),
+            'schema' => '//',
+            'view' => $view,
+        ]);
+
+        $this->copyStub('FormView', $viewPath, [
+            'submitAction' => filled($model) ? ($isEditForm ? 'save' : 'create') : 'submit',
+        ]);
+
+        $this->components->info("Ballstack form [{$path}] created successfully.");
+
+        return;
 
     }
 
-    protected function verifyIfClassExist(string $string)
+    protected function checkIfModelExist(string $model): void
     {
+        if ($model) {
+            $modelPath = app_path("Models/{$model}.php");
 
+            if (!File::exists($modelPath)) {
+                $this->components->error("Model {$model} does not exist.");
+                $this->canCreateModel($model);
+            }
+        }
     }
 }
