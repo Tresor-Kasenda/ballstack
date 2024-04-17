@@ -90,18 +90,22 @@ class MakeFormCommand extends Command
             return;
         }
 
+        $namespace = 'App\\Livewire' . ($componentNamespace !== '' ? "\\{$componentNamespace}" : '');
+
         $this->copyStub(filled($model) ? ($isEditForm ? 'EditForm' : 'CreateForm') : 'Form', $path, [
             'class' => $componentClass,
             'model' => $model,
             'modelClass' => $modelClass,
-            'namespace' => 'App\\Livewire' . ($componentNamespace !== '' ? "\\{$componentNamespace}" : ''),
-            'schema' => '//',
+            'namespace' => $namespace,
+            'schema' => '// Your fields',
             'view' => $view,
         ]);
 
         $this->copyStub('FormView', $viewPath, [
             'submitAction' => filled($model) ? ($isEditForm ? 'save' : 'create') : 'submit',
         ]);
+
+        $this->addRoute($componentClass, $namespace);
 
         $this->components->info("Ballstack form [{$path}] created successfully.");
 
@@ -119,5 +123,42 @@ class MakeFormCommand extends Command
                 $this->canCreateModel($model);
             }
         }
+    }
+
+    protected function addRoute(string $componentClass, string $namespace): void
+    {
+        $removeSuffix = (string)str($componentClass)->remove('Form');
+
+        $namingRoute = (string)str($removeSuffix)->snake('-');
+        $urlName = (string)str($removeSuffix)->snake('/');
+        $routeFile = base_path('routes/web.php');
+
+        $componentName = (string)str($namespace)
+            ->prepend('\\')
+            ->append('\\')
+            ->append($componentClass)
+            ->append('::class');
+
+        $this->routeStub($urlName, $componentName, $namingRoute, $routeFile);
+
+        $this->components->info("Route for component {$componentName} added successfully.");
+    }
+
+    public function routeStub(string $urlName, string $componentName, string $namingRoute, string $routeFile): void
+    {
+        $newRoute = <<<ROUTE
+Route::get('/{$urlName}', $componentName)->name('$namingRoute')->middleware('auth');
+ROUTE;
+
+        $content = $this->getContent($routeFile);
+
+        if (!str_contains($content, $newRoute)) {
+            File::append($routeFile, $newRoute);
+            $this->info("New route added successfully.");
+        } else {
+            $this->warn("The route already exists in the file.");
+        }
+
+        File::append($routeFile, $newRoute);
     }
 }

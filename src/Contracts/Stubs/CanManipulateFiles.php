@@ -57,6 +57,13 @@ trait CanManipulateFiles
         $filesystem->put($path, $contents);
     }
 
+    protected function getContent(string $path): string
+    {
+        $filesystem = app(Filesystem::class);
+
+        return $filesystem->get($path);
+    }
+
     private function checkIfComponentExists(array $paths): bool
     {
         $pathsCollection = collect($paths);
