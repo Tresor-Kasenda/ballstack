@@ -29,13 +29,15 @@ class BallStackServiceProvider extends ServiceProvider
 
         ], 'tresorkasenda/ballstack');
 
-        Blade::directive('ballStackScripts', fn(string $expression): string => "<?php echo \Tresorkasenda\Facades\BallStackAsset::renderScripts({$expression}) ?>");
-
-        Blade::directive('ballStackStyles', fn(string $expression): string => "<?php echo \Tresorkasenda\Facades\BallStackAsset::renderStyles({$expression}) ?>");
-
-        Blade::extend(fn($view) => preg_replace('/\s*@trim\s*/m', '', $view));
-
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ballstack');
+
+        $this->publishes([
+            __DIR__ . '/../config/ballstack.php' => config_path('ballstack.php'),
+        ]);
+
+        $this->loadMigrationsFrom([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ]);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -44,10 +46,6 @@ class BallStackServiceProvider extends ServiceProvider
                 MakeUserCommand::class
             ]);
         }
-
-        $this->publishes([
-            __DIR__ . '/../config/ballstack.php' => config_path('ballstack.php'),
-        ]);
     }
 
     public function register(): void
