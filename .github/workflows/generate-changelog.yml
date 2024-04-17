@@ -3,7 +3,7 @@ name: Create Release
 on:
   push:
     branches:
-      - master 
+      - main
 
 jobs:
   create_release:
@@ -12,6 +12,17 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Set Git Config
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Create Tag
+        run: git tag v1.0.1
+
+      - name: Push Tag
+        run: git push origin v1.0.1
 
       - name: Create Release
         id: create_release
@@ -25,4 +36,4 @@ jobs:
           prerelease: false
 
       - name: Get Release URL
-        run: echo "Release URL:"
+        run: echo "Release URL: "
