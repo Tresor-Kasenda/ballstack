@@ -13,19 +13,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: npm install -g auto-changelog
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v1.0.1
+          release_name: Release v1.0.1
+          body: |
+            Release notes for v1.0.1
+          draft: false
+          prerelease: false
 
-      - name: Generate Changelog
-        id: changelog
-        run: auto-changelog --stdout --template keepachangelog > CHANGELOG.md
-
-      - name: Commit Changelog
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "<>"
-          git add CHANGELOG.md
-          git commit -m "Update Changelog [skip ci]"
-          git push https://github.com/${{ github.repository }}.git HEAD:main
-            # use personal access token for authentication
-            # git push https://username:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+      - name: Get Release URL
+        run: echo "Release URL: "
