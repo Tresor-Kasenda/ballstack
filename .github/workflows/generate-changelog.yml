@@ -1,12 +1,12 @@
-name: Generate Changelog
+name: Create Release
 
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master 
 
 jobs:
-  generate_changelog:
+  create_release:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,4 +25,4 @@ jobs:
           prerelease: false
 
       - name: Get Release URL
-        run: echo "Release URL: "
+        run: echo "Release URL:"
