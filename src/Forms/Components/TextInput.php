@@ -6,8 +6,6 @@ namespace Tresorkasenda\Forms\Components;
 
 use Closure;
 use Tresorkasenda\Contracts\HasDisabled;
-use Tresorkasenda\Contracts\HasEvaluated;
-use Tresorkasenda\Contracts\HasLabel;
 use Tresorkasenda\Contracts\HasLivewire;
 use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
@@ -16,13 +14,11 @@ use Tresorkasenda\Forms\Field;
 class TextInput extends Field
 {
     use HasDisabled;
-    use HasEvaluated;
-    use HasLabel;
     use HasLivewire;
     use HasPlaceholder;
     use HasRequired;
 
-    protected string|Closure|null $type = "text";
+    protected string|Closure|null $type = "";
 
     protected int|Closure|null $minimum = null;
 
@@ -38,14 +34,7 @@ class TextInput extends Field
 
     protected string|Closure|null $prefix = null;
 
-    protected string|Closure|null $position = null;
-
     protected string $view = "ballstack::forms.components.text-input";
-
-    public function getUniqueId(): string
-    {
-        return $this->evaluate($this->uniqueId);
-    }
 
     public function type(string|Closure $type): self
     {
@@ -201,17 +190,5 @@ class TextInput extends Field
     public function getPrefix(): ?string
     {
         return $this->evaluate($this->prefix);
-    }
-
-    public function position(string|Closure|null $position = 'left'): static
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    public function getPosition(): ?string
-    {
-        return $this->evaluate($this->position);
     }
 }

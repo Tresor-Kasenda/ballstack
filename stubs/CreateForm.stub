@@ -30,7 +30,7 @@ class {{ class }} extends Component
             ->action(__('Save'));
     }
 
-    public function create(): void
+    public function submit(): void
     {
         $data = $this->validate();
 

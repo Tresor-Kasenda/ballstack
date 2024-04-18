@@ -1,5 +1,4 @@
 @php
-    $name = $getName();
     $label = $getLabel();
     $required = $getRequired();
     $multiple = $getMultiple();
@@ -44,10 +43,10 @@
                 credits:{},
                 server: {
                     process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-                        @this.upload('{{ $name }}', file, load, error, progress);
+                        @this.upload('{{ $getName() }}', file, load, error, progress);
                     },
                     revert: (filename, load) => {
-                        @this.removeUpload('{{ $name }}', filename, load);
+                        @this.removeUpload('{{ $getName() }}', filename, load);
                     }
                 },
             });
@@ -62,11 +61,11 @@
         <input
             type="file"
             class="border round-xl"
-            id="{{ $name }}"
-            name="{{ $name }}"
+            id="{{ $getName() }}"
+            name="{{ $getName() }}"
             x-ref="input"
             @if($required) required @endif
-            wire:model="{{ $name }}"
+            wire:model.live="{{ $getName() }}"
             @if($multiple) multiple @endif
             @if($reorder)data-allow-reorder="true" @endif
             @if($fileSize)data-max-file-size="{{ $fileSize }}" @endif

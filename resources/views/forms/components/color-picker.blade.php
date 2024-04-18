@@ -3,7 +3,7 @@
     x-data="{
         initColorPicker() {
             this.colorPicker = new iro.ColorPicker(this.$refs.input, {
-                @if($getWidth()) width: {{ $getWidth() }}, @endif
+                @if($getSize()) width: {{ $getSize() }}, @endif
                 color: '#f00',
             });
             this.colorPicker.on('color:change', (color) => {

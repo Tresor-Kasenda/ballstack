@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tresorkasenda\Contracts;
 
-use Tresorkasenda\Forms\Inputs\Textarea;
-
 trait HasDisabled
 {
     protected bool $disabled = false;
@@ -15,7 +13,7 @@ trait HasDisabled
         return $this->evaluate($this->disabled);
     }
 
-    public function disabled(bool $disabled = true): Textarea
+    public function disabled(bool $disabled = true): self
     {
         $this->disabled = $disabled;
 

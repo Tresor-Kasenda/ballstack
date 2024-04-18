@@ -20,7 +20,7 @@ class DateRange extends Field
 
     protected string|Closure|null $maxDate = null;
 
-    protected string $view = "ballstack::forms.components.date-picker";
+    protected string $view = "ballstack::forms.components.date-range";
 
     public function minDate(string $minDate): self
     {

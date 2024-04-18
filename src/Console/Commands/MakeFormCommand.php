@@ -152,13 +152,6 @@ ROUTE;
 
         $content = $this->getContent($routeFile);
 
-        if (!str_contains($content, $newRoute)) {
-            File::append($routeFile, $newRoute);
-            $this->info("New route added successfully.");
-        } else {
-            $this->warn("The route already exists in the file.");
-        }
-
         File::append($routeFile, $newRoute);
     }
 }

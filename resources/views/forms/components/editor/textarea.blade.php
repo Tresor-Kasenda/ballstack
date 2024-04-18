@@ -34,7 +34,7 @@
     @endif
     <div class="form-control-wrap">
         <textarea
-            class="form-control form-control-sm @error($name) is-invalid @enderror"
+            class="form-control @error($name) is-invalid @enderror"
             id="{{ $name }}"
             name="{{ $name }}"
             placeholder="{{ $placeholder }}"

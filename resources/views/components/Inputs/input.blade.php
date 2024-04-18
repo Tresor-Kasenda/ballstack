@@ -1,3 +1,3 @@
 <input
-    {{ $attributes->class(['form-control']) }}
+    {{ $attributes }}
 />

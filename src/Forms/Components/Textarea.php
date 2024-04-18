@@ -74,9 +74,4 @@ class Textarea extends Field
     {
         return $this->evaluate($this->rows);
     }
-
-    public function getName(): ?string
-    {
-        return $this->evaluate($this->name);
-    }
 }

@@ -13,5 +13,24 @@ class CkEditor extends Field
     use HasLabel;
     use HasPlaceholder;
 
+    protected array $fieldsHeadings = [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        'link',
+        'bulletedList',
+        'numberedList',
+        '|',
+        'outdent',
+        'indent',
+        '|',
+        'blockQuote',
+        'insertTable',
+        'mediaEmbed',
+        'undo',
+        'redo'
+    ];
+
     protected string $view = "ballstack::forms.components.editor.ckeditor";
 }

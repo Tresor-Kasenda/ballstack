@@ -32,7 +32,7 @@ class {{ class }} extends Component
             ->action(__('Save'));
     }
 
-    public function save(): void
+    public function submit(): void
     {
         $data = $this->validate();
 
@@ -40,7 +40,7 @@ class {{ class }} extends Component
 
         $this->record->update($data);
 
-        $this->redirectRoute(name: "{{ route }}", navigate: true);
+        $this->redirectRoute(name: "/{{ route }}", navigate: true);
     }
 
     public function render(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View

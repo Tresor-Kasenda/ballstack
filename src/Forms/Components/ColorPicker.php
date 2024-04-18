@@ -16,18 +16,18 @@ class ColorPicker extends Field
 
     protected string|Closure|null $type = null;
 
-    protected int|Closure|null $width = null;
+    protected int|Closure|null $size = null;
 
     protected string $view = "ballstack::forms.components.color-picker";
 
-    public function getWidth(): ?int
+    public function getSize(): ?int
     {
-        return $this->evaluate($this->width);
+        return $this->evaluate($this->size);
     }
 
-    public function width(int|Closure|null $width): ColorPicker
+    public function size(int|Closure|null $width): ColorPicker
     {
-        $this->width = $width;
+        $this->size = $width;
 
         return $this;
     }
