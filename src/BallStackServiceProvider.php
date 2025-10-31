@@ -10,7 +10,9 @@ use Tresorkasenda\Assets\AssetManager;
 use Tresorkasenda\Console\Commands\BallStackInstallCommand;
 use Tresorkasenda\Console\Commands\MakeFormCommand;
 use Tresorkasenda\Console\Commands\MakeUserCommand;
+use Tresorkasenda\Console\Commands\MakeDatatableCommand;
 use Tresorkasenda\Facades\BallStackAsset;
+use Livewire\Livewire;
 
 class BallStackServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,10 @@ class BallStackServiceProvider extends ServiceProvider
         $this->viewConfig();
 
         $this->configureComponents();
+
+        $this->registerLivewireComponents();
+
+        $this->loadHelpers();
 
         $this->mergeConfigFrom(__DIR__ . '/../config/ballstack.php', 'ballstack');
     }
@@ -43,7 +49,8 @@ class BallStackServiceProvider extends ServiceProvider
             $this->commands([
                 BallStackInstallCommand::class,
                 MakeFormCommand::class,
-                MakeUserCommand::class
+                MakeUserCommand::class,
+                MakeDatatableCommand::class,
             ]);
         }
     }
@@ -58,5 +65,27 @@ class BallStackServiceProvider extends ServiceProvider
         $prefix = config('ballstack.prefix');
 
         Blade::component($prefix . 'logo-guest', 'logo-guest');
+    }
+
+    /**
+     * Register Livewire components.
+     *
+     * @return void
+     */
+    protected function registerLivewireComponents(): void
+    {
+        Livewire::component('ballstack::toast-manager', \Tresorkasenda\Notifications\ToastManager::class);
+    }
+
+    /**
+     * Load helper functions.
+     *
+     * @return void
+     */
+    protected function loadHelpers(): void
+    {
+        if (file_exists($file = __DIR__ . '/Helpers/toast.php')) {
+            require_once $file;
+        }
     }
 }
