@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tresorkasenda\Tables;
 
-use App\View\TallFlex\Exceptions\ModelDoesntExist;
+use Tresorkasenda\Exceptions\ModelDoesntExist;
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +17,24 @@ use Throwable;
 use Tresorkasenda\Contracts\HasEvaluated;
 use Tresorkasenda\Contracts\HasExtractPublicMethods;
 
+/**
+ * Datatable component for displaying and managing tabular data.
+ *
+ * This Livewire component provides pagination, sorting, searching, and actions
+ * for Eloquent models. It automatically detects model columns and provides
+ * a fluent interface for configuring the table display.
+ *
+ * @example
+ * ```php
+ * Datatable::make('users-table')
+ *     ->model(User::class, perPage: 15)
+ *     ->fields(['name', 'email', 'created_at'])
+ *     ->actions([
+ *         'edit' => 'Edit User',
+ *         'delete' => 'Delete User',
+ *     ]);
+ * ```
+ */
 class Datatable extends Component implements Htmlable
 {
     use HasEvaluated;
@@ -56,6 +74,14 @@ class Datatable extends Component implements Htmlable
         return view('ballstack::datatable.table', $this->extractPublicMethods());
     }
 
+    /**
+     * Set the Eloquent model for the datatable.
+     *
+     * @param string $modelClass Fully qualified model class name
+     * @param int $perPage Number of records per page (default: 10)
+     * @return static
+     * @throws ModelDoesntExist When the provided class is not a valid Eloquent model
+     */
     public function model(string $modelClass, int $perPage = 10): static
     {
         if ( ! is_subclass_of($modelClass, Model::class)) {
@@ -78,6 +104,15 @@ class Datatable extends Component implements Htmlable
         return $this->model;
     }
 
+    /**
+     * Set the fields (columns) to display in the datatable.
+     *
+     * An 'actions' column is automatically added to the end of the field list.
+     *
+     * @param array $fields Array of field names to display
+     * @return static
+     * @throws Exception When a field doesn't exist in the model
+     */
     public function fields(array $fields): static
     {
         if ([] !== $this->model) {
@@ -98,6 +133,15 @@ class Datatable extends Component implements Htmlable
         return $this->fields;
     }
 
+    /**
+     * Sort the datatable by a column.
+     *
+     * If the column is already sorted, it toggles between ascending and descending.
+     * Otherwise, it sets the column as the sort column with ascending direction.
+     *
+     * @param string $name Column name to sort by
+     * @return static
+     */
     public function sort(string $name): static
     {
         if ($this->sortColumn === $name) {
@@ -110,6 +154,12 @@ class Datatable extends Component implements Htmlable
         return $this;
     }
 
+    /**
+     * Set the actions available for each row in the datatable.
+     *
+     * @param array $actions Associative array of action key => action label
+     * @return static
+     */
     public function actions(array $actions): static
     {
         $this->actions = $actions;
