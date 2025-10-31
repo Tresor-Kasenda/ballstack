@@ -11,6 +11,22 @@ use Tresorkasenda\Contracts\HasPlaceholder;
 use Tresorkasenda\Contracts\HasRequired;
 use Tresorkasenda\Forms\Field;
 
+/**
+ * TextInput component for creating various types of text-based form inputs.
+ *
+ * This component supports multiple input types including text, email, password, number,
+ * telephone, and URL. It provides a fluent API for configuring input attributes such as
+ * validation rules, placeholders, autofocus, and more.
+ *
+ * @example
+ * ```php
+ * TextInput::make('email')
+ *     ->email()
+ *     ->required()
+ *     ->placeholder('you@example.com')
+ *     ->autofocus();
+ * ```
+ */
 class TextInput extends Field
 {
     use HasDisabled;
@@ -36,6 +52,12 @@ class TextInput extends Field
 
     protected string $view = "ballstack::forms.components.text-input";
 
+    /**
+     * Set the input type attribute.
+     *
+     * @param string|Closure $type The input type (e.g., 'text', 'email', 'password')
+     * @return self
+     */
     public function type(string|Closure $type): self
     {
         $this->type = $type;
